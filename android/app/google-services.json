@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "623368511605",
-    "project_id": "tekflow-cfb04",
-    "storage_bucket": "tekflow-cfb04.firebasestorage.app"
+    "project_number": "25533724713",
+    "project_id": "tekflow-c5e51",
+    "storage_bucket": "tekflow-c5e51.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:623368511605:android:6ad7365a0d45d66da4983c",
+        "mobilesdk_app_id": "1:25533724713:android:42d1c62e4fc92d3f148438",
         "android_client_info": {
           "package_name": "com.tekflow.app"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBLSaIF80A0lDtY57hePECs-oD2f5a-0cQ"
+          "current_key": "AIzaSyA_5q2MCnkbxcmsktOs0jujs7pDuvWfz_8"
         }
       ],
       "services": {

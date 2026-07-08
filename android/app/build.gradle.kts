@@ -2,7 +2,7 @@ plugins {
     id("com.android.application")
     id("kotlin-android")
     id("dev.flutter.flutter-gradle-plugin")
-    id("com.google.gms.google-services")
+    id("com.google.gms.google-services")   // <-- Kini lang, walay version
 }
 
 android {
@@ -27,7 +27,6 @@ android {
         versionCode = flutter.versionCode
         versionName = flutter.versionName
         multiDexEnabled = true
-        missingDimensionStrategy("default", "production")  // <-- Kini ang fix
     }
 
     buildTypes {
@@ -53,10 +52,11 @@ flutter {
 dependencies {
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
     
-    // Firebase BoM
+    // Firebase BoM – para automatic compatible versions
     implementation(platform("com.google.firebase:firebase-bom:34.15.0"))
     
-    // Firebase Analytics
+    // Firebase Analytics – optional but recommended
     implementation("com.google.firebase:firebase-analytics")
     
+    // ❌ WALA NANG google-services nga dependency – PLUGIN na siya, dili library!
 }
