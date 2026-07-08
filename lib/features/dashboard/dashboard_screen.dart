@@ -63,8 +63,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     } else {
       monthlyIncome = txNotifier.thisMonthIncome;
       monthlyExpense = txNotifier.thisMonthExpense;
-      balance = monthlyIncome - monthlyExpense; // or total balance across all accounts?
-      // Let's use sum of all accounts for total balance
+      balance = monthlyIncome - monthlyExpense;
       balance = ref.watch(accountProvider).fold(0, (sum, a) => sum + a.balance);
     }
     final budgetRatio =
@@ -168,7 +167,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                                   color: isAll ? Colors.white : Theme.of(context).colorScheme.onSurface,
                                 ),
                                 selectedColor: accent,
-                                backgroundColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.05),
+                                backgroundColor: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.05),
                                 side: BorderSide.none,
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
                                 showCheckmark: false,
@@ -196,7 +195,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                                 color: isSelected ? Colors.white : Theme.of(context).colorScheme.onSurface,
                               ),
                               selectedColor: accent,
-                              backgroundColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.05),
+                              backgroundColor: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.05),
                               side: BorderSide.none,
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
                               showCheckmark: false,
