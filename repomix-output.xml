@@ -11888,7 +11888,7 @@ class _SmsTile extends StatelessWidget {
     final isDismissed = sms.status == SmsStatus.dismissed;
 
     final amountColor =
-        isDebit ? LightColors.expenseRed : LightColors.incomeGreen;
+        isDebit ? CyanBlackWhite.expenseRed : CyanBlackWhite.incomeGreen;
 
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
@@ -12030,7 +12030,7 @@ class _SmsTile extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                 decoration: BoxDecoration(
                   color: isAdded
-                      ? LightColors.incomeGreen.withValues(alpha: 0.12)
+                      ? CyanBlackWhite.incomeGreen.withValues(alpha: 0.12)
                       : Colors.grey.withValues(alpha: 0.12),
                   borderRadius: BorderRadius.circular(6),
                 ),
@@ -12039,7 +12039,7 @@ class _SmsTile extends StatelessWidget {
                   style: GoogleFonts.plusJakartaSans(
                     fontSize: 11,
                     fontWeight: FontWeight.w600,
-                    color: isAdded ? LightColors.incomeGreen : Colors.grey,
+                    color: isAdded ? CyanBlackWhite.incomeGreen : Colors.grey,
                   ),
                 ),
               ),
@@ -12151,14 +12151,14 @@ class _AddFromSmsSheetState extends State<_AddFromSmsSheet> {
                 _TypeButton(
                   label: 'Expense',
                   selected: _type == TransactionType.expense,
-                  color: LightColors.expenseRed,
+                  color: CyanBlackWhite.expenseRed,
                   onTap: () => setState(() => _type = TransactionType.expense),
                 ),
                 const SizedBox(width: 10),
                 _TypeButton(
                   label: 'Income',
                   selected: _type == TransactionType.income,
-                  color: LightColors.incomeGreen,
+                  color: CyanBlackWhite.incomeGreen,
                   onTap: () => setState(() => _type = TransactionType.income),
                 ),
               ],
@@ -12918,11 +12918,11 @@ class TransactionTile extends StatelessWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     switch (transaction.type) {
       case TransactionType.income:
-        return isDark ? CyanBlackWhite.incomeGreen : LightColors.incomeGreen;
+        return isDark ? CyanBlackWhite.incomeGreen : CyanBlackWhite.incomeGreen;
       case TransactionType.expense:
-        return isDark ? CyanBlackWhite.expenseRed : LightColors.expenseRed;
+        return isDark ? CyanBlackWhite.expenseRed : CyanBlackWhite.expenseRed;
       case TransactionType.transfer:
-        return isDark ? CyanBlackWhite.transferColor : LightColors.transferColor;
+        return isDark ? CyanBlackWhite.transferColor : CyanBlackWhite.transferColor;
     }
   }
 
@@ -13318,37 +13318,37 @@ class AppTheme {
     return ThemeData(
       useMaterial3: true,
       colorScheme: ColorScheme.fromSeed(
-        seedColor: LightColors.accent,
+        seedColor: CyanBlackWhite.accent,
         brightness: Brightness.light,
-        primary: LightColors.accent,
+        primary: CyanBlackWhite.accent,
         onPrimary: Colors.white,
-        secondary: LightColors.accentSecondary,
-        surface: LightColors.surface,
-        onSurface: LightColors.textPrimary,
-        surfaceContainerHighest: LightColors.surfaceVariant,
-        background: LightColors.background,
-        error: LightColors.expenseRed,
+        secondary: CyanBlackWhite.accentSecondary,
+        surface: CyanBlackWhite.surface,
+        onSurface: CyanBlackWhite.textPrimary,
+        surfaceContainerHighest: CyanBlackWhite.surfaceVariant,
+        background: CyanBlackWhite.background,
+        error: CyanBlackWhite.expenseRed,
       ),
-      scaffoldBackgroundColor: LightColors.background,
+      scaffoldBackgroundColor: CyanBlackWhite.background,
       textTheme:
-          _buildTextTheme(LightColors.textPrimary, LightColors.textSecondary),
+          _buildTextTheme(CyanBlackWhite.textPrimary, CyanBlackWhite.textSecondary),
       appBarTheme: AppBarTheme(
-        backgroundColor: LightColors.background,
+        backgroundColor: CyanBlackWhite.background,
         centerTitle: false,
         elevation: 0,
         scrolledUnderElevation: 2,
         systemOverlayStyle: SystemUiOverlayStyle.dark,
         titleTextStyle: GoogleFonts.plusJakartaSans(
-          color: LightColors.textPrimary,
+          color: CyanBlackWhite.textPrimary,
           fontSize: 20,
           fontWeight: FontWeight.w700,
         ),
-        iconTheme: const IconThemeData(color: LightColors.textPrimary),
+        iconTheme: const IconThemeData(color: CyanBlackWhite.textPrimary),
       ),
       navigationBarTheme: NavigationBarThemeData(
-        backgroundColor: LightColors.surface,
+        backgroundColor: CyanBlackWhite.surface,
         elevation: 0,
-        indicatorColor: LightColors.accent.withValues(alpha: 0.12),
+        indicatorColor: CyanBlackWhite.accent.withValues(alpha: 0.12),
         labelTextStyle: WidgetStateProperty.all(
           GoogleFonts.plusJakartaSans(
             fontSize: 12,
@@ -13358,7 +13358,7 @@ class AppTheme {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: LightColors.accent,
+          backgroundColor: CyanBlackWhite.accent,
           foregroundColor: Colors.white,
           elevation: 0,
           shape:
@@ -13371,33 +13371,33 @@ class AppTheme {
         ),
       ),
       inputDecorationTheme: _buildInputTheme(
-        LightColors.background,
-        LightColors.divider,
-        LightColors.textPrimary,
-        LightColors.textSecondary,
-        LightColors.accent,
+        CyanBlackWhite.background,
+        CyanBlackWhite.divider,
+        CyanBlackWhite.textPrimary,
+        CyanBlackWhite.textSecondary,
+        CyanBlackWhite.accent,
       ),
       dividerTheme:
-          const DividerThemeData(color: LightColors.divider, thickness: 1),
+          const DividerThemeData(color: CyanBlackWhite.divider, thickness: 1),
       bottomSheetTheme: const BottomSheetThemeData(
-        backgroundColor: LightColors.surface,
-        modalBackgroundColor: LightColors.surface,
+        backgroundColor: CyanBlackWhite.surface,
+        modalBackgroundColor: CyanBlackWhite.surface,
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
         ),
       ),
       dialogTheme: DialogThemeData(
-        backgroundColor: LightColors.surface,
-        surfaceTintColor: LightColors.surface,
+        backgroundColor: CyanBlackWhite.surface,
+        surfaceTintColor: CyanBlackWhite.surface,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
       ),
       cardTheme: CardThemeData(
-        color: LightColors.surface,
+        color: CyanBlackWhite.surface,
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24),
-          side: const BorderSide(color: LightColors.divider, width: 1),
+          side: const BorderSide(color: CyanBlackWhite.divider, width: 1),
         ),
       ),
     );
@@ -16186,7 +16186,7 @@ class _BalanceCard extends StatelessWidget {
                   label: 'Income',
                   value: income,
                   color:
-                      isDark ? CyanBlackWhite.incomeGreen : LightColors.incomeGreen,
+                      isDark ? CyanBlackWhite.incomeGreen : CyanBlackWhite.incomeGreen,
                   icon: Icons.arrow_downward_rounded,
                   currencySymbol: currencySymbol,
                 ),
@@ -16197,7 +16197,7 @@ class _BalanceCard extends StatelessWidget {
                   label: 'Expense',
                   value: expense,
                   color:
-                      isDark ? CyanBlackWhite.expenseRed : LightColors.expenseRed,
+                      isDark ? CyanBlackWhite.expenseRed : CyanBlackWhite.expenseRed,
                   icon: Icons.arrow_upward_rounded,
                   currencySymbol: currencySymbol,
                 ),
@@ -16630,10 +16630,10 @@ class _TransactionDetail extends StatelessWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final isIncome = transaction.type == TransactionType.income;
     final amountColor = isIncome
-        ? (isDark ? CyanBlackWhite.incomeGreen : LightColors.incomeGreen)
+        ? (isDark ? CyanBlackWhite.incomeGreen : CyanBlackWhite.incomeGreen)
         : transaction.type == TransactionType.transfer
-            ? (isDark ? CyanBlackWhite.transferColor : LightColors.transferColor)
-            : (isDark ? CyanBlackWhite.expenseRed : LightColors.expenseRed);
+            ? (isDark ? CyanBlackWhite.transferColor : CyanBlackWhite.transferColor)
+            : (isDark ? CyanBlackWhite.expenseRed : CyanBlackWhite.expenseRed);
 
     return Container(
       padding: const EdgeInsets.all(24),
@@ -18919,11 +18919,11 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen>
     final isDark = Theme.of(context).brightness == Brightness.dark;
     switch (_selectedType) {
       case TransactionType.expense:
-        return isDark ? CyanBlackWhite.expenseRed : LightColors.expenseRed;
+        return isDark ? CyanBlackWhite.expenseRed : CyanBlackWhite.expenseRed;
       case TransactionType.income:
-        return isDark ? CyanBlackWhite.incomeGreen : LightColors.incomeGreen;
+        return isDark ? CyanBlackWhite.incomeGreen : CyanBlackWhite.incomeGreen;
       case TransactionType.transfer:
-        return isDark ? CyanBlackWhite.transferColor : LightColors.transferColor;
+        return isDark ? CyanBlackWhite.transferColor : CyanBlackWhite.transferColor;
     }
   }
 
