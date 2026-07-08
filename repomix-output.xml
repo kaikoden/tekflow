@@ -413,10 +413,10 @@ Analyzing tekflow...
    info - 'background' is deprecated and shouldn't be used. Use surface instead. This feature was deprecated after v3.18.0-0.1.pre - lib\core\theme\app_theme.dart:20:9 - deprecated_member_use
    info - 'background' is deprecated and shouldn't be used. Use surface instead. This feature was deprecated after v3.18.0-0.1.pre - lib\core\theme\app_theme.dart:100:9 - deprecated_member_use
   error - The named parameter 'gradient' isn't defined - lib\features\analytics\analytics_screen.dart:333:7 - undefined_named_parameter
-  error - The method 'darkBackgroundGradient' isn't defined for the type '_AppLockScreenState' - lib\features\app_lock\app_lock_screen.dart:84:24 - undefined_method
-  error - The method 'lightBackgroundGradient' isn't defined for the type '_AppLockScreenState' - lib\features\app_lock\app_lock_screen.dart:84:51 - undefined_method
-  error - The method 'accentGradientDark' isn't defined for the type '_AppLockScreenState' - lib\features\app_lock\app_lock_screen.dart:99:36 - undefined_method
-  error - The method 'accentGradientLight' isn't defined for the type '_AppLockScreenState' - lib\features\app_lock\app_lock_screen.dart:99:59 - undefined_method
+  error - The method 'CyanBlackWhite.darkBgGradient' isn't defined for the type '_AppLockScreenState' - lib\features\app_lock\app_lock_screen.dart:84:24 - undefined_method
+  error - The method 'CyanBlackWhite.lightBg' isn't defined for the type '_AppLockScreenState' - lib\features\app_lock\app_lock_screen.dart:84:51 - undefined_method
+  error - The method 'CyanBlackWhite.cyan' isn't defined for the type '_AppLockScreenState' - lib\features\app_lock\app_lock_screen.dart:99:36 - undefined_method
+  error - The method 'CyanBlackWhite.cyan' isn't defined for the type '_AppLockScreenState' - lib\features\app_lock\app_lock_screen.dart:99:59 - undefined_method
    info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\dashboard\dashboard_screen.dart:176:90 - deprecated_member_use
    info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\dashboard\dashboard_screen.dart:204:88 - deprecated_member_use
 warning - Unused import: '../../core/theme/app_colors.dart' - lib\features\dashboard\home_shell.dart:3:8 - unused_import
@@ -434,13 +434,13 @@ warning - The label 'bottomNavigationBar' isn't used - lib\features\dashboard\ho
   error - Unexpected text ';' - lib\features\dashboard\home_shell.dart:122:5 - unexpected_token
    info - Unnecessary empty statement - lib\features\dashboard\home_shell.dart:122:6 - empty_statements
 warning - Unused import: '../../core/theme/app_colors.dart' - lib\features\onboarding\onboarding_screen.dart:5:8 - unused_import
-  error - The method 'darkBackgroundGradient' isn't defined for the type '_OnboardingScreenState' - lib\features\onboarding\onboarding_screen.dart:79:24 - undefined_method
-  error - The method 'lightBackgroundGradient' isn't defined for the type '_OnboardingScreenState' - lib\features\onboarding\onboarding_screen.dart:79:51 - undefined_method
+  error - The method 'CyanBlackWhite.darkBgGradient' isn't defined for the type '_OnboardingScreenState' - lib\features\onboarding\onboarding_screen.dart:79:24 - undefined_method
+  error - The method 'CyanBlackWhite.lightBg' isn't defined for the type '_OnboardingScreenState' - lib\features\onboarding\onboarding_screen.dart:79:51 - undefined_method
    info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\features\settings\manage_accounts_screen.dart:199:15 - deprecated_member_use
-  error - The method 'darkBackgroundGradient' isn't defined for the type 'SmsInboxScreen' - lib\features\sms\sms_inbox_screen.dart:25:24 - undefined_method
-  error - The method 'lightBackgroundGradient' isn't defined for the type 'SmsInboxScreen' - lib\features\sms\sms_inbox_screen.dart:25:51 - undefined_method
-  error - The method 'darkBackgroundGradient' isn't defined for the type '_SplashScreenState' - lib\features\splash\splash_screen.dart:116:26 - undefined_method
-  error - The method 'lightBackgroundGradient' isn't defined for the type '_SplashScreenState' - lib\features\splash\splash_screen.dart:116:53 - undefined_method
+  error - The method 'CyanBlackWhite.darkBgGradient' isn't defined for the type 'SmsInboxScreen' - lib\features\sms\sms_inbox_screen.dart:25:24 - undefined_method
+  error - The method 'CyanBlackWhite.lightBg' isn't defined for the type 'SmsInboxScreen' - lib\features\sms\sms_inbox_screen.dart:25:51 - undefined_method
+  error - The method 'CyanBlackWhite.darkBgGradient' isn't defined for the type '_SplashScreenState' - lib\features\splash\splash_screen.dart:116:26 - undefined_method
+  error - The method 'CyanBlackWhite.lightBg' isn't defined for the type '_SplashScreenState' - lib\features\splash\splash_screen.dart:116:53 - undefined_method
 </file>
 
 <file path="android/.gitignore">
@@ -9205,7 +9205,7 @@ END
 import 'package:flutter/material.dart';
 
 // ─── Dark Mode Colors ─────────────────────────────────────────────────────────
-class DarkColors {
+class CyanBlackWhite {
   static const Color background = Color(0xFF111318);
   static const Color surface = Color(0xFF1A1C1E);
   static const Color surfaceVariant = Color(0xFF41474D);
@@ -9220,7 +9220,7 @@ class DarkColors {
 }
 
 // ─── Light Mode Colors ────────────────────────────────────────────────────────
-class LightColors {
+class CyanBlackWhite {
   static const Color background = Color(0xFFFDFBFF);
   static const Color surface = Color(0xFFFDFBFF);
   static const Color surfaceVariant = Color(0xFFE1E2EC);
