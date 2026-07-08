@@ -2,7 +2,7 @@
 
 <img src="assets/icon/app_icon.png" alt="tekflow Logo" width="100" height="100" style="border-radius:22px"/>
 
-# tekflow
+# Tekflow
 
 **Track every rupee, own your future.**
 
