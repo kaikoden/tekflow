@@ -13,7 +13,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
@@ -42,8 +42,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
-          with:
-    node-version: '20'
 
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
@@ -60,6 +58,6 @@ jobs:
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: trackify-release-apk
+          name: tekflow-release-apk
           path: build/app/outputs/flutter-apk/app-release.apk
           retention-days: 30
