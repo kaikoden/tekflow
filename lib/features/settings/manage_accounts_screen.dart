@@ -60,7 +60,10 @@ class ManageAccountsScreen extends ConsumerWidget {
                           style: GoogleFonts.plusJakartaSans(
                             fontSize: 12,
                             fontWeight: FontWeight.w600,
-                            color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5),
+                            color: Theme.of(context)
+                                .colorScheme
+                                .onSurface
+                                .withValues(alpha: 0.5),
                           ),
                         ),
                       ],
@@ -196,7 +199,7 @@ class _AccountDialogState extends ConsumerState<_AccountDialog> {
             ),
             const SizedBox(height: 16),
             DropdownButtonFormField<AccountType>(
-              value: _selectedType,
+              initialValue: _selectedType,  // ✅ Gi-ilis na ni gikan sa value
               decoration: const InputDecoration(labelText: 'Account Type'),
               items: AccountType.values.map((type) {
                 return DropdownMenuItem(
