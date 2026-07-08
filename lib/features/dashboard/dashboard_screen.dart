@@ -387,7 +387,7 @@ class _BalanceCard extends StatelessWidget {
                   label: 'Income',
                   value: income,
                   color:
-                      isDark ? DarkColors.incomeGreen : LightColors.incomeGreen,
+                      isDark ? CyanBlackWhite.incomeGreen : CyanBlackWhite.incomeGreen,
                   icon: Icons.arrow_downward_rounded,
                   currencySymbol: currencySymbol,
                 ),
@@ -398,7 +398,7 @@ class _BalanceCard extends StatelessWidget {
                   label: 'Expense',
                   value: expense,
                   color:
-                      isDark ? DarkColors.expenseRed : LightColors.expenseRed,
+                      isDark ? CyanBlackWhite.expenseRed : CyanBlackWhite.expenseRed,
                   icon: Icons.arrow_upward_rounded,
                   currencySymbol: currencySymbol,
                 ),
@@ -831,10 +831,10 @@ class _TransactionDetail extends StatelessWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final isIncome = transaction.type == TransactionType.income;
     final amountColor = isIncome
-        ? (isDark ? DarkColors.incomeGreen : LightColors.incomeGreen)
+        ? (isDark ? CyanBlackWhite.incomeGreen : CyanBlackWhite.incomeGreen)
         : transaction.type == TransactionType.transfer
-            ? (isDark ? DarkColors.transferColor : LightColors.transferColor)
-            : (isDark ? DarkColors.expenseRed : LightColors.expenseRed);
+            ? (isDark ? CyanBlackWhite.transferColor : CyanBlackWhite.transferColor)
+            : (isDark ? CyanBlackWhite.expenseRed : CyanBlackWhite.expenseRed);
 
     return Container(
       padding: const EdgeInsets.all(24),

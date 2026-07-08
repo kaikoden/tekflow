@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.blixcode.mithmoney"
+    namespace = "com.tekflow.app"
     compileSdk = 36
     ndkVersion = flutter.ndkVersion
 
@@ -20,7 +20,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.blixcode.mithmoney"
+        applicationId = "com.tekflow.app"
         minSdk = flutter.minSdkVersion
         targetSdk = 36
         versionCode = flutter.versionCode
@@ -39,7 +39,7 @@ android {
     applicationVariants.all {
         outputs.all {
             val output = this as? com.android.build.gradle.internal.api.BaseVariantOutputImpl
-            output?.outputFileName = "mithmoney.apk"
+            output?.outputFileName = "tekflow.apk"
         }
     }
 }

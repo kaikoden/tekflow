@@ -4,122 +4,116 @@ import 'package:google_fonts/google_fonts.dart';
 import 'app_colors.dart';
 
 class AppTheme {
-  // ─── Dark Theme ─────────────────────────────────────────────────────────────
   static ThemeData dark() {
     return ThemeData(
       useMaterial3: true,
       colorScheme: ColorScheme.fromSeed(
-        seedColor: DarkColors.accent,
+        seedColor: CyanBlackWhite.cyan,
         brightness: Brightness.dark,
-        primary: DarkColors.accent,
-        onPrimary: const Color(0xFF381E72),
-        secondary: DarkColors.accentSecondary,
-        surface: DarkColors.surface,
-        onSurface: DarkColors.textPrimary,
-        surfaceContainerHighest: DarkColors.surfaceVariant,
-        background: DarkColors.background,
-        error: DarkColors.expenseRed,
+        primary: CyanBlackWhite.cyan,
+        onPrimary: Colors.black,
+        secondary: CyanBlackWhite.cyan,
+        surface: CyanBlackWhite.darkSurface,
+        onSurface: CyanBlackWhite.darkTextPrimary,
+        surfaceContainerHighest: CyanBlackWhite.darkSurfaceVariant,
+        background: CyanBlackWhite.darkBg,
+        error: const Color(0xFFFF4D4D),
       ),
-      scaffoldBackgroundColor: DarkColors.background,
-      textTheme:
-          _buildTextTheme(DarkColors.textPrimary, DarkColors.textSecondary),
+      scaffoldBackgroundColor: CyanBlackWhite.darkBg,
+      textTheme: _buildTextTheme(
+        CyanBlackWhite.darkTextPrimary,
+        CyanBlackWhite.darkTextSecondary,
+      ),
       appBarTheme: AppBarTheme(
-        backgroundColor: DarkColors.background,
+        backgroundColor: CyanBlackWhite.darkBg,
         elevation: 0,
         scrolledUnderElevation: 2,
         systemOverlayStyle: SystemUiOverlayStyle.light,
         titleTextStyle: GoogleFonts.plusJakartaSans(
-          color: DarkColors.textPrimary,
+          color: CyanBlackWhite.darkTextPrimary,
           fontSize: 20,
           fontWeight: FontWeight.w700,
         ),
-        iconTheme: const IconThemeData(color: DarkColors.textPrimary),
+        iconTheme: const IconThemeData(color: CyanBlackWhite.white),
       ),
       navigationBarTheme: NavigationBarThemeData(
-        backgroundColor: DarkColors.surface,
-        elevation: 0,
-        indicatorColor: DarkColors.accent.withValues(alpha: 0.12),
+        backgroundColor: CyanBlackWhite.darkSurface,
+        indicatorColor: CyanBlackWhite.cyan.withValues(alpha: 0.2),
         labelTextStyle: WidgetStateProperty.all(
           GoogleFonts.plusJakartaSans(
             fontSize: 12,
             fontWeight: FontWeight.w600,
-            color: DarkColors.textPrimary,
+            color: CyanBlackWhite.darkTextPrimary,
           ),
         ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: DarkColors.accent,
-          foregroundColor: const Color(0xFF381E72),
-          elevation: 0,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          backgroundColor: CyanBlackWhite.cyan,
+          foregroundColor: Colors.black,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
-          textStyle: GoogleFonts.plusJakartaSans(
-            fontWeight: FontWeight.w700,
-            fontSize: 15,
-          ),
+          textStyle: GoogleFonts.plusJakartaSans(fontWeight: FontWeight.w700, fontSize: 15),
         ),
       ),
       inputDecorationTheme: _buildInputTheme(
-        DarkColors.surface,
-        DarkColors.divider,
-        DarkColors.textPrimary,
-        DarkColors.textSecondary,
-        DarkColors.accent,
+        CyanBlackWhite.darkSurface,
+        CyanBlackWhite.darkDivider,
+        CyanBlackWhite.darkTextPrimary,
+        CyanBlackWhite.darkTextSecondary,
+        CyanBlackWhite.cyan,
       ),
-      dividerTheme: const DividerThemeData(color: DarkColors.divider, thickness: 1),
+      dividerTheme: const DividerThemeData(color: CyanBlackWhite.darkDivider, thickness: 1),
       bottomSheetTheme: const BottomSheetThemeData(
-        backgroundColor: DarkColors.surface,
-        modalBackgroundColor: DarkColors.surface,
+        backgroundColor: CyanBlackWhite.darkSurface,
+        modalBackgroundColor: CyanBlackWhite.darkSurface,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
         ),
       ),
       dialogTheme: DialogThemeData(
-        backgroundColor: DarkColors.surface,
-        surfaceTintColor: DarkColors.surface,
+        backgroundColor: CyanBlackWhite.darkSurface,
+        surfaceTintColor: CyanBlackWhite.darkSurface,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
       ),
     );
   }
 
-  // ─── Light Theme ────────────────────────────────────────────────────────────
   static ThemeData light() {
     return ThemeData(
       useMaterial3: true,
       colorScheme: ColorScheme.fromSeed(
-        seedColor: LightColors.accent,
+        seedColor: CyanBlackWhite.cyan,
         brightness: Brightness.light,
-        primary: LightColors.accent,
+        primary: CyanBlackWhite.cyan,
         onPrimary: Colors.white,
-        secondary: LightColors.accentSecondary,
-        surface: LightColors.surface,
-        onSurface: LightColors.textPrimary,
-        surfaceContainerHighest: LightColors.surfaceVariant,
-        background: LightColors.background,
-        error: LightColors.expenseRed,
+        secondary: CyanBlackWhite.cyan,
+        surface: CyanBlackWhite.lightSurface,
+        onSurface: CyanBlackWhite.lightTextPrimary,
+        surfaceContainerHighest: CyanBlackWhite.lightSurfaceVariant,
+        background: CyanBlackWhite.lightBg,
+        error: const Color(0xFFFF4D4D),
       ),
-      scaffoldBackgroundColor: LightColors.background,
-      textTheme:
-          _buildTextTheme(LightColors.textPrimary, LightColors.textSecondary),
+      scaffoldBackgroundColor: CyanBlackWhite.lightBg,
+      textTheme: _buildTextTheme(
+        CyanBlackWhite.lightTextPrimary,
+        CyanBlackWhite.lightTextSecondary,
+      ),
       appBarTheme: AppBarTheme(
-        backgroundColor: LightColors.background,
-        centerTitle: false,
+        backgroundColor: CyanBlackWhite.lightBg,
         elevation: 0,
         scrolledUnderElevation: 2,
         systemOverlayStyle: SystemUiOverlayStyle.dark,
         titleTextStyle: GoogleFonts.plusJakartaSans(
-          color: LightColors.textPrimary,
+          color: CyanBlackWhite.lightTextPrimary,
           fontSize: 20,
           fontWeight: FontWeight.w700,
         ),
-        iconTheme: const IconThemeData(color: LightColors.textPrimary),
+        iconTheme: const IconThemeData(color: CyanBlackWhite.black),
       ),
       navigationBarTheme: NavigationBarThemeData(
-        backgroundColor: LightColors.surface,
-        elevation: 0,
-        indicatorColor: LightColors.accent.withValues(alpha: 0.12),
+        backgroundColor: CyanBlackWhite.lightSurface,
+        indicatorColor: CyanBlackWhite.cyan.withValues(alpha: 0.15),
         labelTextStyle: WidgetStateProperty.all(
           GoogleFonts.plusJakartaSans(
             fontSize: 12,
@@ -129,88 +123,65 @@ class AppTheme {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: LightColors.accent,
+          backgroundColor: CyanBlackWhite.cyan,
           foregroundColor: Colors.white,
-          elevation: 0,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
-          textStyle: GoogleFonts.plusJakartaSans(
-            fontWeight: FontWeight.w700,
-            fontSize: 15,
-          ),
+          textStyle: GoogleFonts.plusJakartaSans(fontWeight: FontWeight.w700, fontSize: 15),
         ),
       ),
       inputDecorationTheme: _buildInputTheme(
-        LightColors.background,
-        LightColors.divider,
-        LightColors.textPrimary,
-        LightColors.textSecondary,
-        LightColors.accent,
+        CyanBlackWhite.lightBg,
+        CyanBlackWhite.lightDivider,
+        CyanBlackWhite.lightTextPrimary,
+        CyanBlackWhite.lightTextSecondary,
+        CyanBlackWhite.cyan,
       ),
-      dividerTheme:
-          const DividerThemeData(color: LightColors.divider, thickness: 1),
+      dividerTheme: const DividerThemeData(color: CyanBlackWhite.lightDivider, thickness: 1),
       bottomSheetTheme: const BottomSheetThemeData(
-        backgroundColor: LightColors.surface,
-        modalBackgroundColor: LightColors.surface,
+        backgroundColor: CyanBlackWhite.lightSurface,
+        modalBackgroundColor: CyanBlackWhite.lightSurface,
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
         ),
       ),
       dialogTheme: DialogThemeData(
-        backgroundColor: LightColors.surface,
-        surfaceTintColor: LightColors.surface,
+        backgroundColor: CyanBlackWhite.lightSurface,
+        surfaceTintColor: CyanBlackWhite.lightSurface,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
       ),
       cardTheme: CardThemeData(
-        color: LightColors.surface,
+        color: CyanBlackWhite.lightSurface,
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24),
-          side: const BorderSide(color: LightColors.divider, width: 1),
+          side: const BorderSide(color: CyanBlackWhite.lightDivider, width: 1),
         ),
       ),
     );
   }
 
-  // ─── Shared Text Theme ───────────────────────────────────────────────────────
   static TextTheme _buildTextTheme(Color primary, Color secondary) {
     return GoogleFonts.plusJakartaSansTextTheme().copyWith(
-      displayLarge: GoogleFonts.plusJakartaSans(
-          fontSize: 57, fontWeight: FontWeight.w700, color: primary),
-      displayMedium: GoogleFonts.plusJakartaSans(
-          fontSize: 45, fontWeight: FontWeight.w700, color: primary),
-      displaySmall: GoogleFonts.plusJakartaSans(
-          fontSize: 36, fontWeight: FontWeight.w700, color: primary),
-      headlineLarge: GoogleFonts.plusJakartaSans(
-          fontSize: 32, fontWeight: FontWeight.w700, color: primary),
-      headlineMedium: GoogleFonts.plusJakartaSans(
-          fontSize: 28, fontWeight: FontWeight.w600, color: primary),
-      headlineSmall: GoogleFonts.plusJakartaSans(
-          fontSize: 24, fontWeight: FontWeight.w600, color: primary),
-      titleLarge: GoogleFonts.plusJakartaSans(
-          fontSize: 22, fontWeight: FontWeight.w700, color: primary),
-      titleMedium: GoogleFonts.plusJakartaSans(
-          fontSize: 16, fontWeight: FontWeight.w600, color: primary),
-      titleSmall: GoogleFonts.plusJakartaSans(
-          fontSize: 14, fontWeight: FontWeight.w600, color: primary),
-      bodyLarge: GoogleFonts.plusJakartaSans(
-          fontSize: 16, fontWeight: FontWeight.w400, color: primary),
-      bodyMedium: GoogleFonts.plusJakartaSans(
-          fontSize: 14, fontWeight: FontWeight.w400, color: primary),
-      bodySmall: GoogleFonts.plusJakartaSans(
-          fontSize: 12, fontWeight: FontWeight.w400, color: secondary),
-      labelLarge: GoogleFonts.plusJakartaSans(
-          fontSize: 14, fontWeight: FontWeight.w600, color: primary),
-      labelMedium: GoogleFonts.plusJakartaSans(
-          fontSize: 12, fontWeight: FontWeight.w500, color: secondary),
-      labelSmall: GoogleFonts.plusJakartaSans(
-          fontSize: 11, fontWeight: FontWeight.w500, color: secondary),
+      displayLarge: GoogleFonts.plusJakartaSans(fontSize: 57, fontWeight: FontWeight.w700, color: primary),
+      displayMedium: GoogleFonts.plusJakartaSans(fontSize: 45, fontWeight: FontWeight.w700, color: primary),
+      displaySmall: GoogleFonts.plusJakartaSans(fontSize: 36, fontWeight: FontWeight.w700, color: primary),
+      headlineLarge: GoogleFonts.plusJakartaSans(fontSize: 32, fontWeight: FontWeight.w700, color: primary),
+      headlineMedium: GoogleFonts.plusJakartaSans(fontSize: 28, fontWeight: FontWeight.w600, color: primary),
+      headlineSmall: GoogleFonts.plusJakartaSans(fontSize: 24, fontWeight: FontWeight.w600, color: primary),
+      titleLarge: GoogleFonts.plusJakartaSans(fontSize: 22, fontWeight: FontWeight.w700, color: primary),
+      titleMedium: GoogleFonts.plusJakartaSans(fontSize: 16, fontWeight: FontWeight.w600, color: primary),
+      titleSmall: GoogleFonts.plusJakartaSans(fontSize: 14, fontWeight: FontWeight.w600, color: primary),
+      bodyLarge: GoogleFonts.plusJakartaSans(fontSize: 16, fontWeight: FontWeight.w400, color: primary),
+      bodyMedium: GoogleFonts.plusJakartaSans(fontSize: 14, fontWeight: FontWeight.w400, color: primary),
+      bodySmall: GoogleFonts.plusJakartaSans(fontSize: 12, fontWeight: FontWeight.w400, color: secondary),
+      labelLarge: GoogleFonts.plusJakartaSans(fontSize: 14, fontWeight: FontWeight.w600, color: primary),
+      labelMedium: GoogleFonts.plusJakartaSans(fontSize: 12, fontWeight: FontWeight.w500, color: secondary),
+      labelSmall: GoogleFonts.plusJakartaSans(fontSize: 11, fontWeight: FontWeight.w500, color: secondary),
     );
   }
 
-  // ─── Shared Input Theme ──────────────────────────────────────────────────────
   static InputDecorationTheme _buildInputTheme(
     Color fill,
     Color border,

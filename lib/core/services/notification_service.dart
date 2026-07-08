@@ -138,7 +138,7 @@ class NotificationService {
     }
 
     const androidDetails = AndroidNotificationDetails(
-      'mithmoney_daily_reminder',
+      'tekflow_daily_reminder',
       'Daily Reminder',
       channelDescription: 'Reminds you to log your daily expenses',
       importance: Importance.max,
@@ -215,7 +215,7 @@ class NotificationService {
     if (!_initialized) await init();
     try {
       const androidDetails = AndroidNotificationDetails(
-        'mithmoney_test',
+        'tekflow_test',
         'Test Alerts',
         channelDescription: 'Testing channel for immediate verification',
         importance: Importance.max,
@@ -239,7 +239,7 @@ class NotificationService {
         id: kDailyReminderNotifId + 1,
         title: '🚀 Immediate Test Alert',
         body:
-            'If you can see this, your phone is allowing MithMoney notifications natively!',
+            'If you can see this, your phone is allowing tekflow notifications natively!',
         notificationDetails: details,
       );
       AppLogger.i('NotificationService', 'Immediate test notification fired');

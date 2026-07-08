@@ -18,8 +18,8 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   int _currentPage = 0;
   final _nameController = TextEditingController();
   double _budgetValue = 20000;
-  String _currency = 'INR';
-  String _currencySymbol = '₹';
+  String _currency = 'PHP';
+  String _currencySymbol = '₱';
   bool _notificationsEnabled = true;
   bool _smsEnabled = false;
 
@@ -210,7 +210,7 @@ class _WelcomePage extends StatelessWidget {
               curve: Curves.elasticOut),
           const SizedBox(height: 32),
           Text(
-            'Welcome to MithMoney',
+            'Welcome to tekflow',
             style: GoogleFonts.plusJakartaSans(
               fontSize: 28,
               fontWeight: FontWeight.w800,
@@ -429,7 +429,7 @@ class _PermissionsPage extends StatelessWidget {
           ).animate().fadeIn(duration: 400.ms),
           const SizedBox(height: 8),
           Text(
-            'Enable reminders and optionally let MithMoney scan your bank SMS — all stays on your device.',
+            'Enable reminders and optionally let tekflow scan your bank SMS — all stays on your device.',
             style: GoogleFonts.plusJakartaSans(
               fontSize: 15,
               color: Theme.of(context)

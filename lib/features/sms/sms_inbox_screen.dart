@@ -257,7 +257,7 @@ class _SmsTile extends StatelessWidget {
     final isDismissed = sms.status == SmsStatus.dismissed;
 
     final amountColor =
-        isDebit ? LightColors.expenseRed : LightColors.incomeGreen;
+        isDebit ? CyanBlackWhite.expenseRed : CyanBlackWhite.incomeGreen;
 
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
@@ -399,7 +399,7 @@ class _SmsTile extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                 decoration: BoxDecoration(
                   color: isAdded
-                      ? LightColors.incomeGreen.withValues(alpha: 0.12)
+                      ? CyanBlackWhite.incomeGreen.withValues(alpha: 0.12)
                       : Colors.grey.withValues(alpha: 0.12),
                   borderRadius: BorderRadius.circular(6),
                 ),
@@ -408,7 +408,7 @@ class _SmsTile extends StatelessWidget {
                   style: GoogleFonts.plusJakartaSans(
                     fontSize: 11,
                     fontWeight: FontWeight.w600,
-                    color: isAdded ? LightColors.incomeGreen : Colors.grey,
+                    color: isAdded ? CyanBlackWhite.incomeGreen : Colors.grey,
                   ),
                 ),
               ),
@@ -520,14 +520,14 @@ class _AddFromSmsSheetState extends State<_AddFromSmsSheet> {
                 _TypeButton(
                   label: 'Expense',
                   selected: _type == TransactionType.expense,
-                  color: LightColors.expenseRed,
+                  color: CyanBlackWhite.expenseRed,
                   onTap: () => setState(() => _type = TransactionType.expense),
                 ),
                 const SizedBox(width: 10),
                 _TypeButton(
                   label: 'Income',
                   selected: _type == TransactionType.income,
-                  color: LightColors.incomeGreen,
+                  color: CyanBlackWhite.incomeGreen,
                   onTap: () => setState(() => _type = TransactionType.income),
                 ),
               ],

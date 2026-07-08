@@ -66,8 +66,8 @@ class AppSettings extends HiveObject {
   AppSettings({
     this.userName = '',
     this.avatarPath,
-    this.currency = 'INR',
-    this.currencySymbol = '₹',
+    this.currency = 'PHP',
+    this.currencySymbol = '₱',
     this.themeMode = 0,
     this.notificationEnabled = true,
     this.notificationHour = 21,

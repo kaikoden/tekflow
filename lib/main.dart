@@ -113,11 +113,11 @@ void main() async {
     );
   }
 
-  runApp(const ProviderScope(child: MithMoneyApp()));
+  runApp(const ProviderScope(child: TekflowApp()));
 }
 
-class MithMoneyApp extends ConsumerWidget {
-  const MithMoneyApp({super.key});
+class TekflowApp extends ConsumerWidget {
+  const TekflowApp({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

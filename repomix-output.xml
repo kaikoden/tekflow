@@ -52,8 +52,8 @@ android/.gitignore
 android/app/build.gradle.kts
 android/app/src/debug/AndroidManifest.xml
 android/app/src/main/AndroidManifest.xml
-android/app/src/main/kotlin/com/blixcode/mithmoney/MainActivity.kt
-android/app/src/main/kotlin/com/blixcode/mithmoney/MithMoneyWidget.kt
+android/app/src/main/kotlin/com/blixcode/tekflow/MainActivity.kt
+android/app/src/main/kotlin/com/blixcode/tekflow/tekflowWidget.kt
 android/app/src/main/res/drawable-hdpi/ic_launcher_foreground.png
 android/app/src/main/res/drawable-mdpi/ic_launcher_foreground.png
 android/app/src/main/res/drawable-v21/launch_background.xml
@@ -408,7 +408,7 @@ linter:
 </file>
 
 <file path="analysis.txt">
-Analyzing MithMoney...                                          
+Analyzing tekflow...                                          
 
    info - 'background' is deprecated and shouldn't be used. Use surface instead. This feature was deprecated after v3.18.0-0.1.pre - lib\core\theme\app_theme.dart:20:9 - deprecated_member_use
    info - 'background' is deprecated and shouldn't be used. Use surface instead. This feature was deprecated after v3.18.0-0.1.pre - lib\core\theme\app_theme.dart:100:9 - deprecated_member_use
@@ -470,8 +470,8 @@ key.properties
 </manifest>
 </file>
 
-<file path="android/app/src/main/kotlin/com/blixcode/mithmoney/MainActivity.kt">
-package com.blixcode.mithmoney
+<file path="android/app/src/main/kotlin/com/blixcode/tekflow/MainActivity.kt">
+package com.blixcode.tekflow
 
 import io.flutter.embedding.android.FlutterFragmentActivity
 
@@ -542,7 +542,7 @@ class MainActivity: FlutterFragmentActivity()
             android:id="@+id/app_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="MithMoney"
+            android:text="tekflow"
             android:textColor="#FFFFFF"
             android:textSize="12sp"
             android:alpha="0.7" />
@@ -765,7 +765,7 @@ This Code of Conduct is adapted from the [Contributor Covenant](https://www.cont
 </file>
 
 <file path="final_analysis.txt">
-Analyzing MithMoney...                                          
+Analyzing tekflow...                                          
 
    info - 'background' is deprecated and shouldn't be used. Use surface instead. This feature was deprecated after v3.18.0-0.1.pre - lib\core\theme\app_theme.dart:20:9 - deprecated_member_use
    info - 'background' is deprecated and shouldn't be used. Use surface instead. This feature was deprecated after v3.18.0-0.1.pre - lib\core\theme\app_theme.dart:100:9 - deprecated_member_use
@@ -1279,7 +1279,7 @@ import '../../data/models/transaction_model.dart';
 import '../../core/utils/app_logger.dart';
 
 class WidgetService {
-  static const String _androidWidgetName = 'MithMoneyWidget';
+  static const String _androidWidgetName = 'tekflowWidget';
 
   static Future<void> updateWidget({
     required double totalBalance,
@@ -4316,7 +4316,7 @@ plugins {
 }
 
 android {
-    namespace = "com.blixcode.mithmoney"
+    namespace = "com.blixcode.tekflow"
     compileSdk = 36
     ndkVersion = flutter.ndkVersion
 
@@ -4331,7 +4331,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.blixcode.mithmoney"
+        applicationId = "com.blixcode.tekflow"
         minSdk = flutter.minSdkVersion
         targetSdk = 36
         versionCode = flutter.versionCode
@@ -4350,7 +4350,7 @@ android {
     applicationVariants.all {
         outputs.all {
             val output = this as? com.android.build.gradle.internal.api.BaseVariantOutputImpl
-            output?.outputFileName = "mithmoney.apk"
+            output?.outputFileName = "tekflow.apk"
         }
     }
 }
@@ -4364,8 +4364,8 @@ dependencies {
 }
 </file>
 
-<file path="android/app/src/main/kotlin/com/blixcode/mithmoney/MithMoneyWidget.kt">
-package com.blixcode.mithmoney
+<file path="android/app/src/main/kotlin/com/blixcode/tekflow/tekflowWidget.kt">
+package com.blixcode.tekflow
 
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
@@ -4377,7 +4377,7 @@ import android.widget.RemoteViews
 import es.antonborri.home_widget.HomeWidgetProvider
 import es.antonborri.home_widget.HomeWidgetLaunchIntent
 
-class MithMoneyWidget : HomeWidgetProvider() {
+class tekflowWidget : HomeWidgetProvider() {
     override fun onUpdate(
         context: Context,
         appWidgetManager: AppWidgetManager,
@@ -4404,7 +4404,7 @@ class MithMoneyWidget : HomeWidgetProvider() {
                 val pendingIntent = HomeWidgetLaunchIntent.getActivity(
                     context, 
                     MainActivity::class.java, 
-                    Uri.parse("mithmoney://add_expense")
+                    Uri.parse("tekflow://add_expense")
                 )
                 setOnClickPendingIntent(R.id.add_expense, pendingIntent)
                 
@@ -4412,7 +4412,7 @@ class MithMoneyWidget : HomeWidgetProvider() {
                 val openAppIntent = HomeWidgetLaunchIntent.getActivity(
                     context, 
                     MainActivity::class.java, 
-                    Uri.parse("mithmoney://home")
+                    Uri.parse("tekflow://home")
                 )
                 setOnClickPendingIntent(R.id.total_balance, openAppIntent)
             }
@@ -4478,7 +4478,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 </file>
 
 <file path="CONTRIBUTING.md">
-# Contributing to MithMoney
+# Contributing to tekflow
 
 Thank you for taking the time to contribute! Here's how to get started.
 
@@ -4488,8 +4488,8 @@ Thank you for taking the time to contribute! Here's how to get started.
 
 1. Fork the repository and clone your fork:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/mithmoney.git
-   cd mithmoney
+   git clone https://github.com/YOUR_USERNAME/tekflow.git
+   cd tekflow
    ```
 
 2. Install Flutter (≥ 3.0.0): https://docs.flutter.dev/get-started/install
@@ -4956,7 +4956,7 @@ By contributing you agree that your contributions will be licensed under the [MI
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.blixcode.mithmoney;
+				PRODUCT_BUNDLE_IDENTIFIER = com.blixcode.tekflow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -4972,7 +4972,7 @@ By contributing you agree that your contributions will be licensed under the [MI
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.blixcode.mithmoney.RunnerTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.blixcode.tekflow.RunnerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -4989,7 +4989,7 @@ By contributing you agree that your contributions will be licensed under the [MI
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.blixcode.mithmoney.RunnerTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.blixcode.tekflow.RunnerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Runner.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Runner";
@@ -5004,7 +5004,7 @@ By contributing you agree that your contributions will be licensed under the [MI
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.blixcode.mithmoney.RunnerTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.blixcode.tekflow.RunnerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Runner.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Runner";
@@ -5135,7 +5135,7 @@ By contributing you agree that your contributions will be licensed under the [MI
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.blixcode.mithmoney;
+				PRODUCT_BUNDLE_IDENTIFIER = com.blixcode.tekflow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -5157,7 +5157,7 @@ By contributing you agree that your contributions will be licensed under the [MI
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.blixcode.mithmoney;
+				PRODUCT_BUNDLE_IDENTIFIER = com.blixcode.tekflow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -5237,7 +5237,7 @@ import UIKit
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>MithMoney</string>
+	<string>tekflow</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -5245,7 +5245,7 @@ import UIKit
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>mithmoney</string>
+	<string>tekflow</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -7003,10 +7003,10 @@ project(runner LANGUAGES CXX)
 
 # The name of the executable created for the application. Change this to change
 # the on-disk name of your application.
-set(BINARY_NAME "mithmoney")
+set(BINARY_NAME "tekflow")
 # The unique GTK application identifier for this application. See:
 # https://wiki.gnome.org/HowDoI/ChooseApplicationID
-set(APPLICATION_ID "com.blixcode.mithmoney")
+set(APPLICATION_ID "com.blixcode.tekflow")
 
 # Explicitly opt in to modern CMake behaviors to avoid warnings with recent
 # versions of CMake.
@@ -7175,11 +7175,11 @@ static void my_application_activate(GApplication* application) {
   if (use_header_bar) {
     GtkHeaderBar* header_bar = GTK_HEADER_BAR(gtk_header_bar_new());
     gtk_widget_show(GTK_WIDGET(header_bar));
-    gtk_header_bar_set_title(header_bar, "MithMoney");
+    gtk_header_bar_set_title(header_bar, "tekflow");
     gtk_header_bar_set_show_close_button(header_bar, TRUE);
     gtk_window_set_titlebar(window, GTK_WIDGET(header_bar));
   } else {
-    gtk_window_set_title(window, "MithMoney");
+    gtk_window_set_title(window, "tekflow");
   }
 
   gtk_window_set_default_size(window, 1280, 720);
@@ -7345,7 +7345,7 @@ MyApplication* my_application_new() {
 		331C80D7294CF71000263BE5 /* RunnerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnerTests.swift; sourceTree = "<group>"; };
 		333000ED22D3DE5D00554162 /* Warnings.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Warnings.xcconfig; sourceTree = "<group>"; };
 		335BBD1A22A9A15E00E9071D /* GeneratedPluginRegistrant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedPluginRegistrant.swift; sourceTree = "<group>"; };
-		33CC10ED2044A3C60003C045 /* mithmoney.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mithmoney.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		33CC10ED2044A3C60003C045 /* tekflow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "tekflow.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		33CC10F02044A3C60003C045 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		33CC10F22044A3C60003C045 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Runner/Assets.xcassets; sourceTree = "<group>"; };
 		33CC10F52044A3C60003C045 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -7412,7 +7412,7 @@ MyApplication* my_application_new() {
 		33CC10EE2044A3C60003C045 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				33CC10ED2044A3C60003C045 /* mithmoney.app */,
+				33CC10ED2044A3C60003C045 /* tekflow.app */,
 				331C80D5294CF71000263BE5 /* RunnerTests.xctest */,
 			);
 			name = Products;
@@ -7498,7 +7498,7 @@ MyApplication* my_application_new() {
 			);
 			name = Runner;
 			productName = Runner;
-			productReference = 33CC10ED2044A3C60003C045 /* mithmoney.app */;
+			productReference = 33CC10ED2044A3C60003C045 /* tekflow.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -7666,10 +7666,10 @@ MyApplication* my_application_new() {
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.blixcode.mithmoney.RunnerTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.blixcode.tekflow.RunnerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mithmoney.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/mithmoney";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/tekflow.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/tekflow";
 			};
 			name = Debug;
 		};
@@ -7680,10 +7680,10 @@ MyApplication* my_application_new() {
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.blixcode.mithmoney.RunnerTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.blixcode.tekflow.RunnerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mithmoney.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/mithmoney";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/tekflow.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/tekflow";
 			};
 			name = Release;
 		};
@@ -7694,10 +7694,10 @@ MyApplication* my_application_new() {
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.blixcode.mithmoney.RunnerTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.blixcode.tekflow.RunnerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mithmoney.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/mithmoney";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/tekflow.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/tekflow";
 			};
 			name = Profile;
 		};
@@ -8004,7 +8004,7 @@ MyApplication* my_application_new() {
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "33CC10EC2044A3C60003C045"
-               BuildableName = "mithmoney.app"
+               BuildableName = "tekflow.app"
                BlueprintName = "Runner"
                ReferencedContainer = "container:Runner.xcodeproj">
             </BuildableReference>
@@ -8020,7 +8020,7 @@ MyApplication* my_application_new() {
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "33CC10EC2044A3C60003C045"
-            BuildableName = "mithmoney.app"
+            BuildableName = "tekflow.app"
             BlueprintName = "Runner"
             ReferencedContainer = "container:Runner.xcodeproj">
          </BuildableReference>
@@ -8055,7 +8055,7 @@ MyApplication* my_application_new() {
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "33CC10EC2044A3C60003C045"
-            BuildableName = "mithmoney.app"
+            BuildableName = "tekflow.app"
             BlueprintName = "Runner"
             ReferencedContainer = "container:Runner.xcodeproj">
          </BuildableReference>
@@ -8072,7 +8072,7 @@ MyApplication* my_application_new() {
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "33CC10EC2044A3C60003C045"
-            BuildableName = "mithmoney.app"
+            BuildableName = "tekflow.app"
             BlueprintName = "Runner"
             ReferencedContainer = "container:Runner.xcodeproj">
          </BuildableReference>
@@ -8096,10 +8096,10 @@ MyApplication* my_application_new() {
 // 'flutter create' template.
 
 // The application's name. By default this is also the title of the Flutter window.
-PRODUCT_NAME = mithmoney
+PRODUCT_NAME = tekflow
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.blixcode.mithmoney
+PRODUCT_BUNDLE_IDENTIFIER = com.blixcode.tekflow
 
 // The copyright displayed in application information
 PRODUCT_COPYRIGHT = Copyright © 2026 com.blixcode. All rights reserved.
@@ -8116,12 +8116,12 @@ PRODUCT_COPYRIGHT = Copyright © 2026 com.blixcode. All rights reserved.
 
 ## Privacy Design
 
-MithMoney is designed from the ground up to be 100% offline and private:
+tekflow is designed from the ground up to be 100% offline and private:
 
 - **No network calls** — the app never connects to any server
 - **No analytics or tracking** — zero telemetry
 - **SMS data stays local** — bank SMS are read and stored only on your device
-- **Biometric data never accessed** — App Lock delegates entirely to Android BiometricPrompt; MithMoney never reads or stores your fingerprint or face data
+- **Biometric data never accessed** — App Lock delegates entirely to Android BiometricPrompt; tekflow never reads or stores your fingerprint or face data
 - **No cloud sync** — backups are exported as local files only
 
 ## Reporting a Vulnerability
@@ -8165,13 +8165,13 @@ You will receive a response within 48 hours. If the issue is confirmed, a patch 
   <!-- iOS meta tags & icons -->
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="MithMoney">
+  <meta name="apple-mobile-web-app-title" content="tekflow">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png"/>
 
-  <title>MithMoney</title>
+  <title>tekflow</title>
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
@@ -8190,8 +8190,8 @@ You will receive a response within 48 hours. If the issue is confirmed, a patch 
 
 <file path="web/manifest.json">
 {
-    "name": "MithMoney",
-    "short_name": "MithMoney",
+    "name": "tekflow",
+    "short_name": "tekflow",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
@@ -8229,11 +8229,11 @@ You will receive a response within 48 hours. If the issue is confirmed, a patch 
 <file path="windows/CMakeLists.txt">
 # Project-level configuration.
 cmake_minimum_required(VERSION 3.14)
-project(mithmoney LANGUAGES CXX)
+project(tekflow LANGUAGES CXX)
 
 # The name of the executable created for the application. Change this to change
 # the on-disk name of your application.
-set(BINARY_NAME "mithmoney")
+set(BINARY_NAME "tekflow")
 
 # Explicitly opt in to modern CMake behaviors to avoid warnings with recent
 # versions of CMake.
@@ -8367,7 +8367,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prev,
   FlutterWindow window(project);
   Win32Window::Point origin(10, 10);
   Win32Window::Size size(1280, 720);
-  if (!window.Create(L"MithMoney", origin, size)) {
+  if (!window.Create(L"tekflow", origin, size)) {
     return EXIT_FAILURE;
   }
   window.SetQuitOnClose(true);
@@ -8476,12 +8476,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.blixcode" "\0"
-            VALUE "FileDescription", "MithMoney" "\0"
+            VALUE "FileDescription", "tekflow" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "mithmoney" "\0"
+            VALUE "InternalName", "tekflow" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2026 com.blixcode. All rights reserved." "\0"
-            VALUE "OriginalFilename", "mithmoney.exe" "\0"
-            VALUE "ProductName", "MithMoney" "\0"
+            VALUE "OriginalFilename", "tekflow.exe" "\0"
+            VALUE "ProductName", "tekflow" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
@@ -10176,9 +10176,9 @@ const Curve kCurveSoft = Curves.easeInOutCubic;
 const Curve kCurveBounce = Curves.elasticOut;
 
 // ─── App Info ─────────────────────────────────────────────────────────────────
-const String kAppName = 'MithMoney';
+const String kAppName = 'tekflow';
 const String kAppVersion = '1.0.0';
-const String kBackupFolder = 'MithMoneyBackups';
+const String kBackupFolder = 'tekflowBackups';
 
 // ─── Supported Currencies ─────────────────────────────────────────────────────
 const List<Map<String, String>> kCurrencies = [
@@ -12918,11 +12918,11 @@ class TransactionTile extends StatelessWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     switch (transaction.type) {
       case TransactionType.income:
-        return isDark ? DarkColors.incomeGreen : LightColors.incomeGreen;
+        return isDark ? CyanBlackWhite.incomeGreen : LightColors.incomeGreen;
       case TransactionType.expense:
-        return isDark ? DarkColors.expenseRed : LightColors.expenseRed;
+        return isDark ? CyanBlackWhite.expenseRed : LightColors.expenseRed;
       case TransactionType.transfer:
-        return isDark ? DarkColors.transferColor : LightColors.transferColor;
+        return isDark ? CyanBlackWhite.transferColor : LightColors.transferColor;
     }
   }
 
@@ -13153,7 +13153,7 @@ class TransactionTile extends StatelessWidget {
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
 
     <application
-        android:label="MithMoney"
+        android:label="tekflow"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:requestLegacyExternalStorage="true"
@@ -13205,7 +13205,7 @@ class TransactionTile extends StatelessWidget {
             android:value="2" />
 
         <!-- Home Screen Widget -->
-        <receiver android:name=".MithMoneyWidget" android:exported="true">
+        <receiver android:name=".tekflowWidget" android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -13238,47 +13238,47 @@ class AppTheme {
     return ThemeData(
       useMaterial3: true,
       colorScheme: ColorScheme.fromSeed(
-        seedColor: DarkColors.accent,
+        seedColor: CyanBlackWhite.accent,
         brightness: Brightness.dark,
-        primary: DarkColors.accent,
+        primary: CyanBlackWhite.accent,
         onPrimary: const Color(0xFF381E72),
-        secondary: DarkColors.accentSecondary,
-        surface: DarkColors.surface,
-        onSurface: DarkColors.textPrimary,
-        surfaceContainerHighest: DarkColors.surfaceVariant,
-        background: DarkColors.background,
-        error: DarkColors.expenseRed,
+        secondary: CyanBlackWhite.accentSecondary,
+        surface: CyanBlackWhite.surface,
+        onSurface: CyanBlackWhite.textPrimary,
+        surfaceContainerHighest: CyanBlackWhite.surfaceVariant,
+        background: CyanBlackWhite.background,
+        error: CyanBlackWhite.expenseRed,
       ),
-      scaffoldBackgroundColor: DarkColors.background,
+      scaffoldBackgroundColor: CyanBlackWhite.background,
       textTheme:
-          _buildTextTheme(DarkColors.textPrimary, DarkColors.textSecondary),
+          _buildTextTheme(CyanBlackWhite.textPrimary, CyanBlackWhite.textSecondary),
       appBarTheme: AppBarTheme(
-        backgroundColor: DarkColors.background,
+        backgroundColor: CyanBlackWhite.background,
         elevation: 0,
         scrolledUnderElevation: 2,
         systemOverlayStyle: SystemUiOverlayStyle.light,
         titleTextStyle: GoogleFonts.plusJakartaSans(
-          color: DarkColors.textPrimary,
+          color: CyanBlackWhite.textPrimary,
           fontSize: 20,
           fontWeight: FontWeight.w700,
         ),
-        iconTheme: const IconThemeData(color: DarkColors.textPrimary),
+        iconTheme: const IconThemeData(color: CyanBlackWhite.textPrimary),
       ),
       navigationBarTheme: NavigationBarThemeData(
-        backgroundColor: DarkColors.surface,
+        backgroundColor: CyanBlackWhite.surface,
         elevation: 0,
-        indicatorColor: DarkColors.accent.withValues(alpha: 0.12),
+        indicatorColor: CyanBlackWhite.accent.withValues(alpha: 0.12),
         labelTextStyle: WidgetStateProperty.all(
           GoogleFonts.plusJakartaSans(
             fontSize: 12,
             fontWeight: FontWeight.w600,
-            color: DarkColors.textPrimary,
+            color: CyanBlackWhite.textPrimary,
           ),
         ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: DarkColors.accent,
+          backgroundColor: CyanBlackWhite.accent,
           foregroundColor: const Color(0xFF381E72),
           elevation: 0,
           shape:
@@ -13291,23 +13291,23 @@ class AppTheme {
         ),
       ),
       inputDecorationTheme: _buildInputTheme(
-        DarkColors.surface,
-        DarkColors.divider,
-        DarkColors.textPrimary,
-        DarkColors.textSecondary,
-        DarkColors.accent,
+        CyanBlackWhite.surface,
+        CyanBlackWhite.divider,
+        CyanBlackWhite.textPrimary,
+        CyanBlackWhite.textSecondary,
+        CyanBlackWhite.accent,
       ),
-      dividerTheme: const DividerThemeData(color: DarkColors.divider, thickness: 1),
+      dividerTheme: const DividerThemeData(color: CyanBlackWhite.divider, thickness: 1),
       bottomSheetTheme: const BottomSheetThemeData(
-        backgroundColor: DarkColors.surface,
-        modalBackgroundColor: DarkColors.surface,
+        backgroundColor: CyanBlackWhite.surface,
+        modalBackgroundColor: CyanBlackWhite.surface,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
         ),
       ),
       dialogTheme: DialogThemeData(
-        backgroundColor: DarkColors.surface,
-        surfaceTintColor: DarkColors.surface,
+        backgroundColor: CyanBlackWhite.surface,
+        surfaceTintColor: CyanBlackWhite.surface,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
       ),
     );
@@ -14294,7 +14294,7 @@ class _AppLockScreenState extends State<AppLockScreen> {
       }
 
       final authenticated = await _auth.authenticate(
-        localizedReason: 'Please authenticate to open MithMoney',
+        localizedReason: 'Please authenticate to open tekflow',
       );
 
       if (authenticated && mounted) {
@@ -14354,7 +14354,7 @@ class _AppLockScreenState extends State<AppLockScreen> {
                   const SizedBox(height: 28),
 
                   Text(
-                    'MithMoney',
+                    'tekflow',
                     style: GoogleFonts.plusJakartaSans(
                       fontSize: 28,
                       fontWeight: FontWeight.w800,
@@ -14651,7 +14651,7 @@ class _WelcomePage extends StatelessWidget {
               curve: Curves.elasticOut),
           const SizedBox(height: 32),
           Text(
-            'Welcome to MithMoney',
+            'Welcome to tekflow',
             style: GoogleFonts.plusJakartaSans(
               fontSize: 28,
               fontWeight: FontWeight.w800,
@@ -14870,7 +14870,7 @@ class _PermissionsPage extends StatelessWidget {
           ).animate().fadeIn(duration: 400.ms),
           const SizedBox(height: 8),
           Text(
-            'Enable reminders and optionally let MithMoney scan your bank SMS — all stays on your device.',
+            'Enable reminders and optionally let tekflow scan your bank SMS — all stays on your device.',
             style: GoogleFonts.plusJakartaSans(
               fontSize: 15,
               color: Theme.of(context)
@@ -15096,11 +15096,11 @@ void main() async {
     );
   }
 
-  runApp(const ProviderScope(child: MithMoneyApp()));
+  runApp(const ProviderScope(child: tekflowApp()));
 }
 
-class MithMoneyApp extends ConsumerWidget {
-  const MithMoneyApp({super.key});
+class tekflowApp extends ConsumerWidget {
+  const tekflowApp({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -15129,9 +15129,9 @@ class MithMoneyApp extends ConsumerWidget {
 <file path="README.md">
 <div align="center">
 
-<img src="assets/icon/app_icon.png" alt="MithMoney Logo" width="100" height="100" style="border-radius:22px"/>
+<img src="assets/icon/app_icon.png" alt="tekflow Logo" width="100" height="100" style="border-radius:22px"/>
 
-# MithMoney
+# tekflow
 
 **Track every rupee, own your future.**
 
@@ -15141,10 +15141,10 @@ Beautiful glassmorphism UI · Riverpod state · Hive local database · Zero data
 [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Flutter](https://img.shields.io/badge/Flutter-3.0%2B-02569B?logo=flutter)](https://flutter.dev)
 [![Dart](https://img.shields.io/badge/Dart-3.0%2B-0175C2?logo=dart)](https://dart.dev)
-[![CI](https://github.com/aswin-blix/mithmoney/actions/workflows/flutter_ci.yml/badge.svg)](https://github.com/aswin-blix/mithmoney/actions)
+[![CI](https://github.com/aswin-blix/tekflow/actions/workflows/flutter_ci.yml/badge.svg)](https://github.com/aswin-blix/tekflow/actions)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
-[**Download APK**](../../releases/latest) · [**Landing Page**](https://aswin-blix.github.io/mithmoney) · [**Report Bug**](../../issues/new?template=bug_report.md) · [**Request Feature**](../../issues/new?template=feature_request.md)
+[**Download APK**](../../releases/latest) · [**Landing Page**](https://aswin-blix.github.io/tekflow) · [**Report Bug**](../../issues/new?template=bug_report.md) · [**Request Feature**](../../issues/new?template=feature_request.md)
 
 </div>
 
@@ -15203,8 +15203,8 @@ Beautiful glassmorphism UI · Riverpod state · Hive local database · Zero data
 
 ```bash
 # 1. Clone
-git clone https://github.com/aswin-blix/mithmoney.git
-cd mithmoney
+git clone https://github.com/aswin-blix/tekflow.git
+cd tekflow
 
 # 2. Install dependencies
 flutter pub get
@@ -15384,7 +15384,7 @@ class _BackupScreenState extends ConsumerState<BackupScreen> {
     try {
       final path = await ref.read(backupRepoProvider).exportToCsv();
       await SharePlus.instance
-          .share(ShareParams(files: [XFile(path)], text: 'MithMoney Export'));
+          .share(ShareParams(files: [XFile(path)], text: 'tekflow Export'));
     } catch (e) {
       _showError('CSV export failed: $e');
     }
@@ -16186,7 +16186,7 @@ class _BalanceCard extends StatelessWidget {
                   label: 'Income',
                   value: income,
                   color:
-                      isDark ? DarkColors.incomeGreen : LightColors.incomeGreen,
+                      isDark ? CyanBlackWhite.incomeGreen : LightColors.incomeGreen,
                   icon: Icons.arrow_downward_rounded,
                   currencySymbol: currencySymbol,
                 ),
@@ -16197,7 +16197,7 @@ class _BalanceCard extends StatelessWidget {
                   label: 'Expense',
                   value: expense,
                   color:
-                      isDark ? DarkColors.expenseRed : LightColors.expenseRed,
+                      isDark ? CyanBlackWhite.expenseRed : LightColors.expenseRed,
                   icon: Icons.arrow_upward_rounded,
                   currencySymbol: currencySymbol,
                 ),
@@ -16630,10 +16630,10 @@ class _TransactionDetail extends StatelessWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final isIncome = transaction.type == TransactionType.income;
     final amountColor = isIncome
-        ? (isDark ? DarkColors.incomeGreen : LightColors.incomeGreen)
+        ? (isDark ? CyanBlackWhite.incomeGreen : LightColors.incomeGreen)
         : transaction.type == TransactionType.transfer
-            ? (isDark ? DarkColors.transferColor : LightColors.transferColor)
-            : (isDark ? DarkColors.expenseRed : LightColors.expenseRed);
+            ? (isDark ? CyanBlackWhite.transferColor : LightColors.transferColor)
+            : (isDark ? CyanBlackWhite.expenseRed : LightColors.expenseRed);
 
     return Container(
       padding: const EdgeInsets.all(24),
@@ -18919,11 +18919,11 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen>
     final isDark = Theme.of(context).brightness == Brightness.dark;
     switch (_selectedType) {
       case TransactionType.expense:
-        return isDark ? DarkColors.expenseRed : LightColors.expenseRed;
+        return isDark ? CyanBlackWhite.expenseRed : LightColors.expenseRed;
       case TransactionType.income:
-        return isDark ? DarkColors.incomeGreen : LightColors.incomeGreen;
+        return isDark ? CyanBlackWhite.incomeGreen : LightColors.incomeGreen;
       case TransactionType.transfer:
-        return isDark ? DarkColors.transferColor : LightColors.transferColor;
+        return isDark ? CyanBlackWhite.transferColor : LightColors.transferColor;
     }
   }
 
@@ -20368,7 +20368,7 @@ class NotificationService {
     }
 
     const androidDetails = AndroidNotificationDetails(
-      'mithmoney_daily_reminder',
+      'tekflow_daily_reminder',
       'Daily Reminder',
       channelDescription: 'Reminds you to log your daily expenses',
       importance: Importance.max,
@@ -20445,7 +20445,7 @@ class NotificationService {
     if (!_initialized) await init();
     try {
       const androidDetails = AndroidNotificationDetails(
-        'mithmoney_test',
+        'tekflow_test',
         'Test Alerts',
         channelDescription: 'Testing channel for immediate verification',
         importance: Importance.max,
@@ -20469,7 +20469,7 @@ class NotificationService {
         id: kDailyReminderNotifId + 1,
         title: '🚀 Immediate Test Alert',
         body:
-            'If you can see this, your phone is allowing MithMoney notifications natively!',
+            'If you can see this, your phone is allowing tekflow notifications natively!',
         notificationDetails: details,
       );
       AppLogger.i('NotificationService', 'Immediate test notification fired');
@@ -20492,7 +20492,7 @@ class NotificationService {
 </file>
 
 <file path="pubspec.yaml">
-name: mithmoney
+name: tekflow
 description: Track every rupee. Own your future.
 publish_to: 'none'
 version: 1.1.0+2

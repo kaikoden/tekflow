@@ -1,6 +1,6 @@
 {
-    "name": "MithMoney",
-    "short_name": "MithMoney",
+    "name": "tekflow",
+    "short_name": "tekflow",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

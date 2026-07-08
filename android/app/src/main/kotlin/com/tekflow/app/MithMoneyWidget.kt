@@ -1,10 +1,7 @@
 package com.tekflow.app
 
-import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
-import android.appwidget.AppWidgetProvider
 import android.content.Context
-import android.content.Intent
 import android.net.Uri
 import android.widget.RemoteViews
 import es.antonborri.home_widget.HomeWidgetProvider
@@ -21,7 +18,7 @@ class MithMoneyWidget : HomeWidgetProvider() {
             val views = RemoteViews(context.packageName, R.layout.mith_money_widget).apply {
                 // Get data from HomeWidget
                 val balance = widgetData.getFloat("total_balance", 0.0f)
-                val symbol = widgetData.getString("currency_symbol", "₹")
+                val symbol = widgetData.getString("currency_symbol", "₱")
                 val lastNote = widgetData.getString("last_tx_note", "No recent transactions")
                 val lastAmount = widgetData.getFloat("last_tx_amount", 0.0f)
 
@@ -37,7 +34,7 @@ class MithMoneyWidget : HomeWidgetProvider() {
                 val pendingIntent = HomeWidgetLaunchIntent.getActivity(
                     context, 
                     MainActivity::class.java, 
-                    Uri.parse("mithmoney://add_expense")
+                    Uri.parse("tekflow://add_expense")
                 )
                 setOnClickPendingIntent(R.id.add_expense, pendingIntent)
                 
@@ -45,7 +42,7 @@ class MithMoneyWidget : HomeWidgetProvider() {
                 val openAppIntent = HomeWidgetLaunchIntent.getActivity(
                     context, 
                     MainActivity::class.java, 
-                    Uri.parse("mithmoney://home")
+                    Uri.parse("tekflow://home")
                 )
                 setOnClickPendingIntent(R.id.total_balance, openAppIntent)
             }

@@ -1,4 +1,4 @@
-# Contributing to MithMoney
+# Contributing to tekflow
 
 Thank you for taking the time to contribute! Here's how to get started.
 
@@ -8,8 +8,8 @@ Thank you for taking the time to contribute! Here's how to get started.
 
 1. Fork the repository and clone your fork:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/mithmoney.git
-   cd mithmoney
+   git clone https://github.com/YOUR_USERNAME/tekflow.git
+   cd tekflow
    ```
 
 2. Install Flutter (≥ 3.0.0): https://docs.flutter.dev/get-started/install

@@ -51,7 +51,7 @@ class _AppLockScreenState extends State<AppLockScreen> {
       }
 
       final authenticated = await _auth.authenticate(
-        localizedReason: 'Please authenticate to open MithMoney',
+        localizedReason: 'Please authenticate to open tekflow',
       );
 
       if (authenticated && mounted) {
@@ -111,7 +111,7 @@ class _AppLockScreenState extends State<AppLockScreen> {
                   const SizedBox(height: 28),
 
                   Text(
-                    'MithMoney',
+                    'tekflow',
                     style: GoogleFonts.plusJakartaSans(
                       fontSize: 28,
                       fontWeight: FontWeight.w800,

@@ -86,11 +86,11 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen>
     final isDark = Theme.of(context).brightness == Brightness.dark;
     switch (_selectedType) {
       case TransactionType.expense:
-        return isDark ? DarkColors.expenseRed : LightColors.expenseRed;
+        return isDark ? CyanBlackWhite.expenseRed : CyanBlackWhite.expenseRed;
       case TransactionType.income:
-        return isDark ? DarkColors.incomeGreen : LightColors.incomeGreen;
+        return isDark ? CyanBlackWhite.incomeGreen : CyanBlackWhite.incomeGreen;
       case TransactionType.transfer:
-        return isDark ? DarkColors.transferColor : LightColors.transferColor;
+        return isDark ? CyanBlackWhite.transferColor : CyanBlackWhite.transferColor;
     }
   }
 
@@ -464,17 +464,17 @@ class _TypeToggle extends StatelessWidget {
       (
         type: TransactionType.expense,
         label: 'Expense',
-        color: const Color(0xFFE8365D)
+        color: CyanBlackWhite.expenseRed
       ),
       (
         type: TransactionType.income,
         label: 'Income',
-        color: const Color(0xFF00B87C)
+        color: CyanBlackWhite.incomeGreen
       ),
       (
         type: TransactionType.transfer,
         label: 'Transfer',
-        color: const Color(0xFFFFB300)
+        color: CyanBlackWhite.transferColor
       ),
     ];
 
@@ -743,11 +743,11 @@ class _CategoryPicker extends StatelessWidget {
                       ),
                     ],
                   ),
-                ),
-              ).animate(delay: Duration(milliseconds: i * 20)).scale(
-                  begin: const Offset(0, 0),
-                  duration: 300.ms,
-                  curve: Curves.elasticOut);
+                ).animate(delay: Duration(milliseconds: i * 20)).scale(
+                    begin: const Offset(0, 0),
+                    duration: 300.ms,
+                    curve: Curves.elasticOut),
+              );
             },
           ),
         ),

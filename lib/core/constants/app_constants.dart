@@ -36,12 +36,13 @@ const Curve kCurveSoft = Curves.easeInOutCubic;
 const Curve kCurveBounce = Curves.elasticOut;
 
 // ─── App Info ─────────────────────────────────────────────────────────────────
-const String kAppName = 'MithMoney';
+const String kAppName = 'tekflow';   // <-- GI-USABAN NA NI nato
 const String kAppVersion = '1.0.0';
-const String kBackupFolder = 'MithMoneyBackups';
+const String kBackupFolder = 'tekflowBackups'; // <-- Pwede nimo usabon
 
 // ─── Supported Currencies ─────────────────────────────────────────────────────
 const List<Map<String, String>> kCurrencies = [
+  {'code': 'PHP', 'symbol': '₱', 'name': 'Philippine Peso'},  // <-- Una ni
   {'code': 'INR', 'symbol': '₹', 'name': 'Indian Rupee'},
   {'code': 'USD', 'symbol': '\$', 'name': 'US Dollar'},
   {'code': 'EUR', 'symbol': '€', 'name': 'Euro'},

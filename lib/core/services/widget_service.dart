@@ -4,7 +4,7 @@ import '../../data/models/transaction_model.dart';
 import '../../core/utils/app_logger.dart';
 
 class WidgetService {
-  static const String _androidWidgetName = 'MithMoneyWidget';
+  static const String _androidWidgetName = 'tekflowWidget';
 
   static Future<void> updateWidget({
     required double totalBalance,

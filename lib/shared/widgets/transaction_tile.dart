@@ -33,11 +33,11 @@ class TransactionTile extends StatelessWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     switch (transaction.type) {
       case TransactionType.income:
-        return isDark ? DarkColors.incomeGreen : LightColors.incomeGreen;
+        return isDark ? CyanBlackWhite.incomeGreen : CyanBlackWhite.incomeGreen;
       case TransactionType.expense:
-        return isDark ? DarkColors.expenseRed : LightColors.expenseRed;
+        return isDark ? CyanBlackWhite.expenseRed : CyanBlackWhite.expenseRed;
       case TransactionType.transfer:
-        return isDark ? DarkColors.transferColor : LightColors.transferColor;
+        return isDark ? CyanBlackWhite.transferColor : CyanBlackWhite.transferColor;
     }
   }
 
