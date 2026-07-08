@@ -2,12 +2,12 @@ plugins {
     id("com.android.application")
     id("kotlin-android")
     id("dev.flutter.flutter-gradle-plugin")
-    id("com.google.gms.google-services")   // <-- Kini lang, walay version
+    id("com.google.gms.google-services")
 }
 
 android {
     namespace = "com.tekflow.app"
-    compileSdk = 36
+    compileSdk = 36   // <-- Usba og 36
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
@@ -23,10 +23,20 @@ android {
     defaultConfig {
         applicationId = "com.tekflow.app"
         minSdk = flutter.minSdkVersion
-        targetSdk = 36
+        targetSdk = 36   // <-- Usba og 36
         versionCode = flutter.versionCode
         versionName = flutter.versionName
         multiDexEnabled = true
+        missingDimensionStrategy("default", "production")
+    }
+
+    signingConfigs {
+        create("release") {
+            storeFile = file("debug.keystore")
+            storePassword = "android"
+            keyAlias = "androiddebugkey"
+            keyPassword = "android"
+        }
     }
 
     buildTypes {
@@ -45,6 +55,7 @@ android {
             }
         }
     }
+}
 
 flutter {
     source = "../.."
@@ -52,12 +63,6 @@ flutter {
 
 dependencies {
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
-    
-    // Firebase BoM – para automatic compatible versions
     implementation(platform("com.google.firebase:firebase-bom:34.15.0"))
-    
-    // Firebase Analytics – optional but recommended
     implementation("com.google.firebase:firebase-analytics")
-    
-    // ❌ WALA NANG google-services nga dependency – PLUGIN na siya, dili library!
 }
