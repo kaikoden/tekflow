@@ -54,8 +54,8 @@ class CategoryModel extends HiveObject {
   Color get color =>
       Color(int.parse(colorHex.replaceFirst('#', 'FF'), radix: 16));
 
+  // ignore: non_const_argument_for_const_parameter
   IconData get icon => IconData(iconCodePoint, fontFamily: 'MaterialIcons');
-
 
   CategoryModel copyWith({
     String? id,
