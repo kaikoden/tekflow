@@ -40,10 +40,11 @@ android {
     applicationVariants.all {
         outputs.all {
             val output = this as? com.android.build.gradle.internal.api.BaseVariantOutputImpl
-            output?.outputFileName = "tekflow.apk"
+            if (output != null && output.name == "release") {
+                output.outputFileName = "tekflow.apk"
+            }
         }
     }
-}
 
 flutter {
     source = "../.."
