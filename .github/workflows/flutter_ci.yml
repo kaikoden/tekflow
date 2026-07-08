@@ -64,6 +64,6 @@ jobs:
         with:
           appId: ${{ secrets.FIREBASE_APP_ID }}
           token: ${{ secrets.FIREBASE_TOKEN }}
-          groups: testers
+          testers: kurtnesbit12@gmail.com   # ✅ Tama na ni
           file: build/app/outputs/flutter-apk/app-release.apk
           releaseNotes: "New version available! Update to get the latest features."
