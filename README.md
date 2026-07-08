@@ -4,7 +4,7 @@
 
 # Tekflow
 
-**Track every rupee, own your future.**
+**Track every peso, own your future.**
 
 A production-grade, 100% offline personal finance tracker built with Flutter.
 Beautiful glassmorphism UI · Riverpod state · Hive local database · Zero data collection.

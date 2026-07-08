@@ -239,7 +239,7 @@ class NotificationService {
         id: kDailyReminderNotifId + 1,
         title: '🚀 Immediate Test Alert',
         body:
-            'If you can see this, your phone is allowing tekflow notifications natively!',
+            'If you can see this, your phone is allowing Tekflow notifications natively!',
         notificationDetails: details,
       );
       AppLogger.i('NotificationService', 'Immediate test notification fired');

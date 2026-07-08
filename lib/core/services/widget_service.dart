@@ -1,5 +1,4 @@
 import 'package:home_widget/home_widget.dart';
-import '../../data/models/app_settings.dart';
 import '../../data/models/transaction_model.dart';
 import '../../core/utils/app_logger.dart';
 

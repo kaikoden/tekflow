@@ -147,7 +147,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
                         child: Transform.translate(
                           offset: Offset(0, _taglineSlide.value * 30),
                           child: Text(
-                            'Track every rupee,\nown your future.',
+                            'Track every peso,\nown your future.',
                             textAlign: TextAlign.center,
                             style: GoogleFonts.plusJakartaSans(
                               fontSize: 16,

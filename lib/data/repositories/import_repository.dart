@@ -88,7 +88,7 @@ class ImportRepository {
 
         // 1. Date
         DateTime date = DateTime.now();
-        if (row.length > 0 && row[0] != null) {
+        if (row.isNotEmpty && row[0] != null) {
           final val = row[0].toString();
           date = DateTime.tryParse(val) ?? _parseCustomDate(val) ?? DateTime.now();
         }

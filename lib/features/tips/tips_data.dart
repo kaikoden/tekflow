@@ -19,7 +19,7 @@ const List<FinanceTip> allTips = [
   FinanceTip(
     id: '1',
     text:
-        'Track every rupee for 30 days — awareness alone reduces spending by 20%.',
+        'Track every peso for 30 days — awareness alone reduces spending by 20%.',
     category: TipCategory.dailyHabits,
     emoji: '📊',
   ),

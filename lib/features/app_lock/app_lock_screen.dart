@@ -51,7 +51,7 @@ class _AppLockScreenState extends State<AppLockScreen> {
       }
 
       final authenticated = await _auth.authenticate(
-        localizedReason: 'Please authenticate to open tekflow',
+        localizedReason: 'Please authenticate to open Tekflow',
       );
 
       if (authenticated && mounted) {
@@ -74,7 +74,7 @@ class _AppLockScreenState extends State<AppLockScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+    
 
     return Scaffold(
       body: Container(
@@ -111,7 +111,7 @@ class _AppLockScreenState extends State<AppLockScreen> {
                   const SizedBox(height: 28),
 
                   Text(
-                    'tekflow',
+                    'Tekflow',
                     style: GoogleFonts.plusJakartaSans(
                       fontSize: 28,
                       fontWeight: FontWeight.w800,

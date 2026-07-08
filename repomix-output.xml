@@ -6328,7 +6328,7 @@ const List<FinanceTip> allTips = [
   FinanceTip(
     id: '1',
     text:
-        'Track every rupee for 30 days — awareness alone reduces spending by 20%.',
+        'Track every peso for 30 days — awareness alone reduces spending by 20%.',
     category: TipCategory.dailyHabits,
     emoji: '📊',
   ),
@@ -8526,7 +8526,7 @@ END
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://aswinblix.github.io/trackify/" />
   <meta property="og:title" content="Trackify — Personal Finance Tracker" />
-  <meta property="og:description" content="Free, open-source Android app to track every rupee. Bank SMS auto-reader, budgets, analytics, biometric lock — 100% offline." />
+  <meta property="og:description" content="Free, open-source Android app to track every peso. Bank SMS auto-reader, budgets, analytics, biometric lock — 100% offline." />
   <meta property="og:image" content="https://aswinblix.github.io/trackify/assets/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -8538,7 +8538,7 @@ END
   <meta name="twitter:site" content="@aswin-blix" />
   <meta name="twitter:creator" content="@aswin-blix" />
   <meta name="twitter:title" content="Trackify — Personal Finance Tracker" />
-  <meta name="twitter:description" content="Free, open-source Android app to track every rupee. Bank SMS auto-reader, budgets, analytics, biometric lock — 100% offline." />
+  <meta name="twitter:description" content="Free, open-source Android app to track every peso. Bank SMS auto-reader, budgets, analytics, biometric lock — 100% offline." />
   <meta name="twitter:image" content="https://aswinblix.github.io/trackify/assets/og-image.png" />
 
   <!-- Theme color for browser chrome -->
@@ -8925,7 +8925,7 @@ END
         <div class="hero-badge-dot"></div>
         Open Source · 100% Offline · Free Forever
       </div>
-      <h1>Track every rupee,<br /><span>own your future.</span></h1>
+      <h1>Track every peso,<br /><span>own your future.</span></h1>
       <p class="hero-sub">
         A beautiful, production-grade personal finance tracker for Android.
         Log expenses, auto-read bank SMS, set budgets, visualize your spending —
@@ -12460,7 +12460,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
                         child: Transform.translate(
                           offset: Offset(0, _taglineSlide.value * 30),
                           child: Text(
-                            'Track every rupee,\nown your future.',
+                            'Track every peso,\nown your future.',
                             textAlign: TextAlign.center,
                             style: GoogleFonts.plusJakartaSans(
                               fontSize: 16,
@@ -15133,7 +15133,7 @@ class tekflowApp extends ConsumerWidget {
 
 # tekflow
 
-**Track every rupee, own your future.**
+**Track every peso, own your future.**
 
 A production-grade, 100% offline personal finance tracker built with Flutter.
 Beautiful glassmorphism UI · Riverpod state · Hive local database · Zero data collection.
@@ -20493,7 +20493,7 @@ class NotificationService {
 
 <file path="pubspec.yaml">
 name: tekflow
-description: Track every rupee. Own your future.
+description: Track every peso. Own your future.
 publish_to: 'none'
 version: 1.1.0+2
 

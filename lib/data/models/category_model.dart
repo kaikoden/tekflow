@@ -56,6 +56,7 @@ class CategoryModel extends HiveObject {
 
   IconData get icon => IconData(iconCodePoint, fontFamily: 'MaterialIcons');
 
+
   CategoryModel copyWith({
     String? id,
     String? name,
