@@ -40,7 +40,14 @@ Beautiful glassmorphism UI · Riverpod state · Hive local database · Zero data
 
 ## Screenshots
 
-> _Screenshots coming soon — contributions welcome!_
+<div align="center">
+  <img src="screenshots/screenshot1.png" width="200" alt="Dashboard"/>
+  <img src="screenshots/screenshot2.png" width="200" alt="Transactions"/>
+  <img src="screenshots/screenshot3.png" width="200" alt="Add Transaction"/>
+  <img src="screenshots/screenshot4.png" width="200" alt="Analytics"/>
+  <img src="screenshots/screenshot5.png" width="200" alt="Budget"/>
+  <img src="screenshots/screenshot6.png" width="200" alt="SMS Reader"/>
+</div>
 
 ---
 
