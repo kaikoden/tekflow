@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../shared/providers/app_providers.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});
@@ -110,7 +111,21 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
           child: Transform.scale(scale: _exitScale.value, child: child),
         ),
         child: Container(
-          decoration: const BoxDecoration(),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: isDark
+                  ? [
+                      const Color(0xFF000000),
+                      const Color(0xFF0A0E21),
+                    ]
+                  : [
+                      const Color(0xFF00D4FF).withValues(alpha: 0.1),
+                      const Color(0xFFFFFFFF),
+                    ],
+            ),
+          ),
           child: Stack(
             children: [
               // Particle burst
@@ -146,18 +161,33 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
                         opacity: _taglineFade.value,
                         child: Transform.translate(
                           offset: Offset(0, _taglineSlide.value * 30),
-                          child: Text(
-                            'Track every peso,\nown your future.',
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.plusJakartaSans(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                              color: isDark
-                                  ? Colors.white.withValues(alpha: 0.6)
-                                  : const Color(0xFF1A1A2E)
-                                      .withValues(alpha: 0.6),
-                              height: 1.5,
-                            ),
+                          child: Column(
+                            children: [
+                              Text(
+                                'tekflow',
+                                style: GoogleFonts.plusJakartaSans(
+                                  fontSize: 28,
+                                  fontWeight: FontWeight.w800,
+                                  color: isDark
+                                      ? Colors.white
+                                      : const Color(0xFF000000),
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              Text(
+                                'Track every peso, own your future.',
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.plusJakartaSans(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                  color: isDark
+                                      ? Colors.white.withValues(alpha: 0.6)
+                                      : const Color(0xFF1A1A2E)
+                                          .withValues(alpha: 0.6),
+                                  height: 1.5,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
@@ -177,8 +207,15 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
       width: 100,
       height: 100,
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primary,
+        color: const Color(0xFF00D4FF),
         borderRadius: BorderRadius.circular(28),
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFF00D4FF).withValues(alpha: 0.3),
+            blurRadius: 30,
+            spreadRadius: 5,
+          ),
+        ],
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(28),
@@ -204,11 +241,10 @@ class _ParticlePainter extends CustomPainter {
             speed: rng.nextDouble() * 180 + 60,
             size: rng.nextDouble() * 4 + 1.5,
             color: [
-              const Color(0xFF6C63FF),
               const Color(0xFF00D4FF),
-              const Color(0xFF00E5A0),
-              Colors.white,
-            ][rng.nextInt(4)],
+              const Color(0xFF000000),
+              const Color(0xFFFFFFFF),
+            ][rng.nextInt(3)],
           );
         });
 
