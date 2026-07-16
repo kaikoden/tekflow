@@ -204,5 +204,4 @@ Distributed under the MIT License. See [LICENSE](LICENSE) for details.
 ---
 
 <div align="center">
-Made with ❤️ by <a href="https://github.com/kaikoden">Kurt Joshua</a> &amp; <a href="https://claude.ai/code">Claude Code</a>
-</div>
+Made with ❤️ by <a href="https://github.com/kaikoden">Kurt Joshua</a>
