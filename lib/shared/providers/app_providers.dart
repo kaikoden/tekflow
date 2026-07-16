@@ -12,10 +12,10 @@ import '../../data/models/account_model.dart';
 import '../../data/models/bank_sms_message.dart';
 import '../../data/repositories/account_repository.dart';
 import '../../data/repositories/import_repository.dart';
-import '../../core/services/widget_service.dart';
-import '../../features/sms/sms_service.dart';
 import '../../data/repositories/savings_repository.dart';
 import '../../data/models/savings_goal_model.dart';
+import '../../core/services/widget_service.dart';
+import '../../features/sms/sms_service.dart';
 
 // ─── Repository Providers ─────────────────────────────────────────────────────
 final transactionRepoProvider = Provider<TransactionRepository>((ref) {
@@ -54,57 +54,6 @@ final savingsRepoProvider = Provider<SavingsRepository>((ref) {
   return SavingsRepository();
 });
 
-// Idugang ang notifier
-class SavingsNotifier extends StateNotifier<List<SavingsGoal>> {
-  final SavingsRepository _repo;
-
-  SavingsNotifier(this._repo) : super(_repo.getAll()) {
-    _repo.listenable.addListener(_onBoxChanged);
-  }
-
-  void _onBoxChanged() {
-    if (mounted) refresh();
-  }
-
-  @override
-  void dispose() {
-    _repo.listenable.removeListener(_onBoxChanged);
-    super.dispose();
-  }
-
-  void refresh() {
-    state = _repo.getAll();
-  }
-
-  Future<void> add(SavingsGoal goal) async {
-    await _repo.add(goal);
-    refresh();
-  }
-
-  Future<void> update(SavingsGoal goal) async {
-    await _repo.update(goal);
-    refresh();
-  }
-
-  Future<void> delete(String id) async {
-    await _repo.delete(id);
-    refresh();
-  }
-
-  Future<void> addContribution(String id, double amount) async {
-    await _repo.addContribution(id, amount);
-    refresh();
-  }
-
-  List<SavingsGoal> get active => _repo.getActive();
-  List<SavingsGoal> get completed => _repo.getCompleted();
-}
-
-final savingsProvider =
-    StateNotifierProvider<SavingsNotifier, List<SavingsGoal>>((ref) {
-  return SavingsNotifier(ref.watch(savingsRepoProvider));
-});
-
 // ─── Settings Provider ────────────────────────────────────────────────────────
 class SettingsNotifier extends StateNotifier<AppSettings> {
   final SettingsRepository _repo;
@@ -114,7 +63,6 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
   Future<void> update(void Function(AppSettings) updater) async {
     try {
       await _repo.updateField(updater);
-      // Clone via JSON to get a new object instance so StateNotifier detects the change
       state = AppSettings.fromJson(_repo.settings.toJson());
     } catch (e, stack) {
       AppLogger.e('SettingsNotifier', 'Failed to update settings', e, stack);
@@ -240,7 +188,6 @@ class TransactionNotifier extends StateNotifier<List<TransactionModel>> {
       AppLogger.i('TransactionNotifier', 'Adding transaction id=${tx.id}');
       await _repo.add(tx);
       
-      // Update account balance
       if (_accountRepo != null && tx.accountId != null) {
         final factor = tx.type == TransactionType.income ? 1.0 : -1.0;
         await _accountRepo.updateBalance(tx.accountId!, tx.amount * factor);
@@ -257,7 +204,6 @@ class TransactionNotifier extends StateNotifier<List<TransactionModel>> {
     try {
       AppLogger.i('TransactionNotifier', 'Updating transaction id=${newTx.id}');
       
-      // Revert old account balance
       if (_accountRepo != null && oldTx.accountId != null) {
         final oldFactor = oldTx.type == TransactionType.income ? -1.0 : 1.0;
         await _accountRepo.updateBalance(oldTx.accountId!, oldTx.amount * oldFactor);
@@ -265,7 +211,6 @@ class TransactionNotifier extends StateNotifier<List<TransactionModel>> {
       
       await _repo.update(newTx);
       
-      // Apply new account balance
       if (_accountRepo != null && newTx.accountId != null) {
         final newFactor = newTx.type == TransactionType.income ? 1.0 : -1.0;
         await _accountRepo.updateBalance(newTx.accountId!, newTx.amount * newFactor);
@@ -282,7 +227,6 @@ class TransactionNotifier extends StateNotifier<List<TransactionModel>> {
     try {
       AppLogger.i('TransactionNotifier', 'Deleting transaction id=${tx.id}');
       
-      // Revert account balance
       if (_accountRepo != null && tx.accountId != null) {
         final factor = tx.type == TransactionType.income ? -1.0 : 1.0;
         await _accountRepo.updateBalance(tx.accountId!, tx.amount * factor);
@@ -355,7 +299,6 @@ class AccountNotifier extends StateNotifier<List<AccountModel>> {
     try {
       AppLogger.i('AccountNotifier', 'Adding account: ${acc.name}');
       await _repo.add(acc);
-      // No need to call refresh() if we use listenable, but let's keep it for safety or just rely on listener
       refresh();
     } catch (e, stack) {
       AppLogger.e('AccountNotifier', 'Failed to add account', e, stack);
@@ -494,4 +437,55 @@ final filteredTransactionsProvider = Provider<List<TransactionModel>>((ref) {
     final matchesAccount = accountId == null || t.accountId == accountId;
     return matchesSearch && matchesType && matchesAccount;
   }).toList();
+});
+
+// ─── Savings Providers ──────────────────────────────────────────────────────
+class SavingsNotifier extends StateNotifier<List<SavingsGoal>> {
+  final SavingsRepository _repo;
+
+  SavingsNotifier(this._repo) : super(_repo.getAll()) {
+    _repo.listenable.addListener(_onBoxChanged);
+  }
+
+  void _onBoxChanged() {
+    if (mounted) refresh();
+  }
+
+  @override
+  void dispose() {
+    _repo.listenable.removeListener(_onBoxChanged);
+    super.dispose();
+  }
+
+  void refresh() {
+    state = _repo.getAll();
+  }
+
+  Future<void> add(SavingsGoal goal) async {
+    await _repo.add(goal);
+    refresh();
+  }
+
+  Future<void> update(SavingsGoal goal) async {
+    await _repo.update(goal);
+    refresh();
+  }
+
+  Future<void> delete(String id) async {
+    await _repo.delete(id);
+    refresh();
+  }
+
+  Future<void> addContribution(String id, double amount) async {
+    await _repo.addContribution(id, amount);
+    refresh();
+  }
+
+  List<SavingsGoal> get active => _repo.getActive();
+  List<SavingsGoal> get completed => _repo.getCompleted();
+}
+
+final savingsProvider =
+    StateNotifierProvider<SavingsNotifier, List<SavingsGoal>>((ref) {
+  return SavingsNotifier(ref.watch(savingsRepoProvider));
 });

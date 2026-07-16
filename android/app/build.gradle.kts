@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.tekflow.app"
-    compileSdk = 36   // <-- Usba og 36
+    compileSdk = 36
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
@@ -23,7 +23,7 @@ android {
     defaultConfig {
         applicationId = "com.tekflow.app"
         minSdk = flutter.minSdkVersion
-        targetSdk = 36   // <-- Usba og 36
+        targetSdk = 36
         versionCode = flutter.versionCode
         versionName = flutter.versionName
         multiDexEnabled = true

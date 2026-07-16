@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import '../../shared/providers/app_providers.dart';
 import '../../shared/widgets/app_card.dart';
 import '../../data/models/savings_goal_model.dart';
+import '../../data/models/transaction_model.dart';
 
 class SavingsScreen extends ConsumerStatefulWidget {
   const SavingsScreen({super.key});
@@ -22,6 +23,17 @@ class _SavingsScreenState extends ConsumerState<SavingsScreen> {
     final symbol = settings.currencySymbol;
     final activeGoals = goals.where((g) => !g.isCompleted).toList();
     final completedGoals = goals.where((g) => g.isCompleted).toList();
+
+    final transactions = ref.watch(transactionProvider);
+    final totalIncome = transactions
+        .where((t) => t.type == TransactionType.income)
+        .fold(0.0, (sum, t) => sum + t.amount);
+    final totalExpense = transactions
+        .where((t) => t.type == TransactionType.expense)
+        .fold(0.0, (sum, t) => sum + t.amount);
+    final totalSaved = goals.fold(0.0, (sum, g) => sum + g.currentAmount);
+    final availableBalance = totalIncome - totalExpense - totalSaved;
+    final hasIncome = totalIncome > 0;
 
     return Scaffold(
       backgroundColor: Colors.transparent,
@@ -51,6 +63,58 @@ class _SavingsScreenState extends ConsumerState<SavingsScreen> {
                   ],
                 ),
               ).animate().fadeIn(duration: 300.ms),
+            ),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(20, 8, 20, 0),
+                child: AppCard(
+                  padding: const EdgeInsets.all(16),
+                  color: !hasIncome 
+                      ? Colors.grey.withValues(alpha: 0.1)
+                      : const Color(0xFF00D4FF).withValues(alpha: 0.1),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            !hasIncome ? 'No Income Recorded' : 'Available to Save',
+                            style: GoogleFonts.plusJakartaSans(
+                              fontSize: 13,
+                              color: Colors.grey[600],
+                            ),
+                          ),
+                          Text(
+                            !hasIncome ? 'Add income first to start saving' : '$symbol${availableBalance.toStringAsFixed(2)}',
+                            style: GoogleFonts.plusJakartaSans(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w800,
+                              color: !hasIncome 
+                                  ? Colors.grey
+                                  : availableBalance >= 0
+                                      ? const Color(0xFF00B87C)
+                                      : const Color(0xFFE8365D),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Icon(
+                        !hasIncome 
+                            ? Icons.info_outline
+                            : availableBalance >= 0
+                                ? Icons.account_balance_wallet_rounded
+                                : Icons.warning_rounded,
+                        color: !hasIncome 
+                            ? Colors.grey
+                            : availableBalance >= 0
+                                ? const Color(0xFF00B87C)
+                                : const Color(0xFFE8365D),
+                      ),
+                    ],
+                  ),
+                ),
+              ).animate(delay: 50.ms).fadeIn(duration: 300.ms),
             ),
             if (activeGoals.isEmpty && completedGoals.isEmpty)
               SliverToBoxAdapter(
@@ -83,7 +147,9 @@ class _SavingsScreenState extends ConsumerState<SavingsScreen> {
                         child: _SavingsGoalCard(
                           goal: goal,
                           symbol: symbol,
-                          onTap: () => _showGoalDetail(context, goal),
+                          availableBalance: availableBalance,
+                          hasIncome: hasIncome,
+                          onTap: () => _showGoalDetail(context, goal, availableBalance, hasIncome),
                           onDelete: () => _deleteGoal(goal),
                         ),
                       );
@@ -118,8 +184,10 @@ class _SavingsScreenState extends ConsumerState<SavingsScreen> {
                         child: _SavingsGoalCard(
                           goal: goal,
                           symbol: symbol,
+                          availableBalance: availableBalance,
+                          hasIncome: hasIncome,
                           isCompleted: true,
-                          onTap: () => _showGoalDetail(context, goal),
+                          onTap: () => _showGoalDetail(context, goal, availableBalance, hasIncome),
                           onDelete: () => _deleteGoal(goal),
                         ),
                       );
@@ -129,6 +197,9 @@ class _SavingsScreenState extends ConsumerState<SavingsScreen> {
                 ),
               ),
             ],
+            SliverToBoxAdapter(
+              child: const SizedBox(height: 20),
+            ),
           ],
         ),
       ),
@@ -145,12 +216,17 @@ class _SavingsScreenState extends ConsumerState<SavingsScreen> {
     }
   }
 
-  Future<void> _showGoalDetail(BuildContext context, SavingsGoal goal) async {
+  // ignore: use_build_context_synchronously
+  Future<void> _showGoalDetail(BuildContext context, SavingsGoal goal, double availableBalance, bool hasIncome) async {
     final result = await showModalBottomSheet<double>(
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      builder: (ctx) => _GoalDetailSheet(goal: goal),
+      builder: (ctx) => _GoalDetailSheet(
+        goal: goal,
+        availableBalance: availableBalance,
+        hasIncome: hasIncome,
+      ),
     );
     if (result != null && result > 0 && mounted) {
       await ref.read(savingsProvider.notifier).addContribution(goal.id, result);
@@ -191,6 +267,8 @@ class _SavingsScreenState extends ConsumerState<SavingsScreen> {
 class _SavingsGoalCard extends StatelessWidget {
   final SavingsGoal goal;
   final String symbol;
+  final double availableBalance;
+  final bool hasIncome;
   final bool isCompleted;
   final VoidCallback onTap;
   final VoidCallback onDelete;
@@ -198,6 +276,8 @@ class _SavingsGoalCard extends StatelessWidget {
   const _SavingsGoalCard({
     required this.goal,
     required this.symbol,
+    required this.availableBalance,
+    required this.hasIncome,
     this.isCompleted = false,
     required this.onTap,
     required this.onDelete,
@@ -206,6 +286,7 @@ class _SavingsGoalCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = Color(goal.colorValue);
+    final canSave = hasIncome && availableBalance > 0;
 
     return AppCard(
       onTap: onTap,
@@ -318,6 +399,30 @@ class _SavingsGoalCard extends StatelessWidget {
               ),
             ],
           ),
+          if (!isCompleted && !canSave)
+            Padding(
+              padding: const EdgeInsets.only(top: 8),
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFE8365D).withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                child: Row(
+                  children: [
+                    const Icon(Icons.info_outline, color: Color(0xFFE8365D), size: 14),
+                    const SizedBox(width: 4),
+                    Text(
+                      !hasIncome ? 'Add income first' : 'No available funds',
+                      style: GoogleFonts.plusJakartaSans(
+                        fontSize: 11,
+                        color: const Color(0xFFE8365D),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
         ],
       ),
     );
@@ -538,8 +643,14 @@ class _AddGoalDialogState extends ConsumerState<_AddGoalDialog> {
 
 class _GoalDetailSheet extends ConsumerStatefulWidget {
   final SavingsGoal goal;
+  final double availableBalance;
+  final bool hasIncome;
 
-  const _GoalDetailSheet({required this.goal});
+  const _GoalDetailSheet({
+    required this.goal,
+    required this.availableBalance,
+    required this.hasIncome,
+  });
 
   @override
   ConsumerState<_GoalDetailSheet> createState() => _GoalDetailSheetState();
@@ -561,6 +672,8 @@ class _GoalDetailSheetState extends ConsumerState<_GoalDetailSheet> {
     final goal = widget.goal;
     final color = Color(goal.colorValue);
     final isCompleted = goal.isCompleted;
+    final maxContribution = widget.availableBalance.clamp(0.0, double.infinity);
+    final canAdd = widget.hasIncome && maxContribution > 0;
 
     return Container(
       padding: const EdgeInsets.all(24),
@@ -709,43 +822,100 @@ class _GoalDetailSheetState extends ConsumerState<_GoalDetailSheet> {
               ],
             ),
             if (!isCompleted) ...[
-              const SizedBox(height: 20),
+              const SizedBox(height: 12),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                decoration: BoxDecoration(
+                  color: canAdd 
+                      ? const Color(0xFF00D4FF).withValues(alpha: 0.08)
+                      : Colors.grey.withValues(alpha: 0.08),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      !widget.hasIncome ? 'No income recorded' : 'Available to add:',
+                      style: GoogleFonts.plusJakartaSans(
+                        fontSize: 13,
+                        color: Colors.grey[600],
+                      ),
+                    ),
+                    Text(
+                      !widget.hasIncome ? 'Add income first' : '$symbol${maxContribution.toStringAsFixed(2)}',
+                      style: GoogleFonts.plusJakartaSans(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700,
+                        color: canAdd
+                            ? const Color(0xFF00B87C)
+                            : Colors.grey,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 12),
               Row(
                 children: [
                   Expanded(
                     child: TextField(
                       controller: _amountController,
+                      enabled: canAdd,
                       decoration: InputDecoration(
-                        hintText: 'Amount to add',
-                        prefixText: '$symbol ',
+                        hintText: canAdd ? 'Amount to add' : 'No funds available',
+                        prefixText: canAdd ? '$symbol ' : '',
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
+                        enabled: canAdd,
                       ),
                       keyboardType: TextInputType.number,
                     ),
                   ),
                   const SizedBox(width: 12),
                   ElevatedButton(
-                    onPressed: () {
-                      final amount = double.tryParse(_amountController.text);
-                      if (amount == null || amount <= 0) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Enter a valid amount')),
-                        );
-                        return;
-                      }
-                      Navigator.pop(context, amount);
-                    },
+                    onPressed: canAdd
+                        ? () {
+                            final amount = double.tryParse(_amountController.text);
+                            if (amount == null || amount <= 0) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(content: Text('Enter a valid amount')),
+                              );
+                              return;
+                            }
+                            if (amount > maxContribution) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('You only have $symbol$maxContribution available to save'),
+                                ),
+                              );
+                              return;
+                            }
+                            Navigator.pop(context, amount);
+                          }
+                        : null,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: color,
+                      backgroundColor: canAdd ? color : Colors.grey,
                       foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                     ),
-                    child: const Text('Add'),
+                    child: Text(canAdd ? 'Add' : 'No Funds'),
                   ),
                 ],
               ),
+              if (!canAdd)
+                Padding(
+                  padding: const EdgeInsets.only(top: 8),
+                  child: Text(
+                    !widget.hasIncome 
+                        ? '💰 Add income first in Transactions tab'
+                        : 'No available funds to save',
+                    style: GoogleFonts.plusJakartaSans(
+                      fontSize: 12,
+                      color: const Color(0xFFE8365D),
+                    ),
+                  ),
+                ),
             ] else ...[
               const SizedBox(height: 20),
               Container(

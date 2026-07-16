@@ -8,6 +8,7 @@ class RateAppDialog {
   static const String _rateDialogShownKey = 'rate_dialog_shown';
   static const int _daysBeforePrompt = 3;
 
+  // ignore: use_build_context_synchronously
   static Future<void> checkAndShow(BuildContext context) async {
     final prefs = await SharedPreferences.getInstance();
     final hasShown = prefs.getBool(_rateDialogShownKey) ?? false;
@@ -155,6 +156,7 @@ class _RateDialogState extends State<_RateDialog> {
                         onPressed: _rating >= 4
                             ? () {
                                 setState(() => _submitted = true);
+                                // ignore: use_build_context_synchronously
                                 Future.delayed(const Duration(seconds: 1), () {
                                   if (mounted) Navigator.pop(context, true);
                                 });
@@ -162,6 +164,7 @@ class _RateDialogState extends State<_RateDialog> {
                             : _rating >= 1
                                 ? () {
                                     setState(() => _submitted = true);
+                                    // ignore: use_build_context_synchronously
                                     Future.delayed(const Duration(seconds: 1), () {
                                       if (mounted) Navigator.pop(context, false);
                                     });
