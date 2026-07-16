@@ -16,6 +16,8 @@ import '../../data/repositories/savings_repository.dart';
 import '../../data/models/savings_goal_model.dart';
 import '../../core/services/widget_service.dart';
 import '../../features/sms/sms_service.dart';
+import '../../data/repositories/recurring_repository.dart';
+import '../../data/models/recurring_transaction_model.dart';
 
 // ─── Repository Providers ─────────────────────────────────────────────────────
 final transactionRepoProvider = Provider<TransactionRepository>((ref) {
@@ -488,4 +490,61 @@ class SavingsNotifier extends StateNotifier<List<SavingsGoal>> {
 final savingsProvider =
     StateNotifierProvider<SavingsNotifier, List<SavingsGoal>>((ref) {
   return SavingsNotifier(ref.watch(savingsRepoProvider));
+});
+
+// ─── Recurring Providers ──────────────────────────────────────────────────────
+final recurringRepoProvider = Provider<RecurringRepository>((ref) {
+  return RecurringRepository();
+});
+
+class RecurringNotifier extends StateNotifier<List<RecurringTransaction>> {
+  final RecurringRepository _repo;
+
+  RecurringNotifier(this._repo) : super(_repo.getAll()) {
+    _repo.listenable.addListener(_onBoxChanged);
+  }
+
+  void _onBoxChanged() {
+    if (mounted) refresh();
+  }
+
+  @override
+  void dispose() {
+    _repo.listenable.removeListener(_onBoxChanged);
+    super.dispose();
+  }
+
+  void refresh() {
+    state = _repo.getAll();
+  }
+
+  Future<void> add(RecurringTransaction recurring) async {
+    await _repo.add(recurring);
+    refresh();
+  }
+
+  Future<void> update(RecurringTransaction recurring) async {
+    await _repo.update(recurring);
+    refresh();
+  }
+
+  Future<void> delete(String id) async {
+    await _repo.delete(id);
+    refresh();
+  }
+
+  Future<void> toggleActive(String id) async {
+    await _repo.toggleActive(id);
+    refresh();
+  }
+
+  Future<void> markExecuted(String id) async {
+    await _repo.markExecuted(id);
+    refresh();
+  }
+}
+
+final recurringProvider =
+    StateNotifierProvider<RecurringNotifier, List<RecurringTransaction>>((ref) {
+  return RecurringNotifier(ref.watch(recurringRepoProvider));
 });

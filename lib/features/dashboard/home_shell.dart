@@ -9,7 +9,7 @@ import '../transactions/add_transaction_screen.dart';
 import '../analytics/analytics_screen.dart';
 import '../settings/settings_screen.dart';
 import '../savings/savings_screen.dart';
-
+import '../recurring/recurring_screen.dart';
 
 class HomeShell extends ConsumerStatefulWidget {
   const HomeShell({super.key});
@@ -49,7 +49,6 @@ class _HomeShellState extends ConsumerState<HomeShell>
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    // Re-lock when app resumes from background if app lock is enabled
     if (state == AppLifecycleState.resumed &&
         _lastLifecycle == AppLifecycleState.paused) {
       final settings = ref.read(settingsProvider);
@@ -59,10 +58,6 @@ class _HomeShellState extends ConsumerState<HomeShell>
     }
     _lastLifecycle = state;
   }
-
-  // Map: tab index accounting for FAB in center (index 2)
-  // Actual screens: 0=Home, 1=Transactions, 3=Analytics, 4=Settings
-  // FAB at index 2 opens Add Transaction sheet
 
   Widget _buildScreen() {
     switch (_currentTab) {
@@ -74,11 +69,13 @@ class _HomeShellState extends ConsumerState<HomeShell>
       case 1:
         return TransactionsScreen(onAddTransaction: _openAddTransaction);
       case 3:
-        return const SavingsScreen();
+        return const RecurringScreen();
       case 4:
-          return const AnalyticsScreen();
+        return const SavingsScreen();
       case 5:
-          return const SettingsScreen();
+        return const AnalyticsScreen();
+      case 6:
+        return const SettingsScreen();
       default:
         return DashboardScreen(
           onAddTransaction: _openAddTransaction,
@@ -111,23 +108,23 @@ class _HomeShellState extends ConsumerState<HomeShell>
       extendBody: true,
       body: AnimatedSwitcher(
         duration: const Duration(milliseconds: 200),
-          transitionBuilder: (child, animation) {
-            return FadeTransition(
-              opacity: animation,
-              child: SlideTransition(
-                position: Tween<Offset>(
-                  begin: const Offset(0, 0.03),
-                  end: Offset.zero,
-                ).animate(animation),
-                child: child,
-              ),
-            );
-          },
-          child: KeyedSubtree(
-            key: ValueKey(_currentTab),
-            child: _buildScreen(),
-          ),
+        transitionBuilder: (child, animation) {
+          return FadeTransition(
+            opacity: animation,
+            child: SlideTransition(
+              position: Tween<Offset>(
+                begin: const Offset(0, 0.03),
+                end: Offset.zero,
+              ).animate(animation),
+              child: child,
+            ),
+          );
+        },
+        child: KeyedSubtree(
+          key: ValueKey(_currentTab),
+          child: _buildScreen(),
         ),
+      ),
       bottomNavigationBar: AppBottomNav(
         currentIndex: _currentTab,
         onTap: _onTabTap,

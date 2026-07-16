@@ -11,6 +11,8 @@ import 'data/models/category_model.dart';
 import 'data/models/bank_sms_message.dart';
 import 'data/models/app_settings.dart';
 import 'data/models/account_model.dart';
+import 'data/models/savings_goal_model.dart';
+import 'data/models/recurring_transaction_model.dart';
 import 'core/constants/app_constants.dart';
 import 'features/splash/splash_screen.dart';
 import 'features/onboarding/onboarding_screen.dart';
@@ -19,8 +21,8 @@ import 'features/backup/backup_screen.dart';
 import 'features/app_lock/app_lock_screen.dart';
 import 'features/sms/sms_inbox_screen.dart';
 import 'shared/providers/app_providers.dart';
-import 'data/models/savings_goal_model.dart';
 
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,10 +37,8 @@ void main() async {
     statusBarIconBrightness: Brightness.light,
   ));
 
-  // Initialize Hive
   await Hive.initFlutter();
 
-  // Register adapters
   if (!Hive.isAdapterRegistered(kTransactionTypeEnumId)) {
     Hive.registerAdapter(TransactionTypeAdapter());
   }
@@ -67,10 +67,12 @@ void main() async {
     Hive.registerAdapter(AccountModelAdapter());
   }
   if (!Hive.isAdapterRegistered(9)) {
-  Hive.registerAdapter(SavingsGoalAdapter());
+    Hive.registerAdapter(SavingsGoalAdapter());
+  }
+  if (!Hive.isAdapterRegistered(10)) {
+    Hive.registerAdapter(RecurringTransactionAdapter());
   }
 
-  // Open boxes
   await Future.wait([
     Hive.openBox<TransactionModel>(kTransactionsBox),
     Hive.openBox<CategoryModel>(kCategoriesBox),
@@ -79,9 +81,9 @@ void main() async {
     Hive.openBox<bool>(kTipsFavoritesBox),
     Hive.openBox<AccountModel>(kAccountsBox),
     Hive.openBox<SavingsGoal>('savings_goals'),
+    Hive.openBox<RecurringTransaction>('recurring_transactions'),
   ]);
 
-  // Seed default categories if box is empty
   final catBox = Hive.box<CategoryModel>(kCategoriesBox);
   if (catBox.isEmpty) {
     for (final cat in defaultCategories) {
@@ -89,7 +91,6 @@ void main() async {
     }
   }
 
-  // Seed default account if box is empty
   final accBox = Hive.box<AccountModel>(kAccountsBox);
   if (accBox.isEmpty) {
     final defaultAccount = AccountModel(
@@ -104,10 +105,8 @@ void main() async {
     await accBox.put(defaultAccount.id, defaultAccount);
   }
 
-  // Initialize notification service
   await NotificationService.instance.init();
 
-  // Reschedule daily reminder if it was previously enabled
   final settingsBox = Hive.box<AppSettings>(kSettingsBox);
   final savedSettings = settingsBox.get('app_settings');
   if (savedSettings != null && savedSettings.notificationEnabled) {
@@ -130,6 +129,7 @@ class TekflowApp extends ConsumerWidget {
     final settings = ref.watch(settingsProvider);
 
     return MaterialApp(
+      navigatorKey: navigatorKey,
       title: kAppName,
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light(),
