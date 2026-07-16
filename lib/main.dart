@@ -19,6 +19,8 @@ import 'features/backup/backup_screen.dart';
 import 'features/app_lock/app_lock_screen.dart';
 import 'features/sms/sms_inbox_screen.dart';
 import 'shared/providers/app_providers.dart';
+import 'data/models/savings_goal_model.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -64,6 +66,9 @@ void main() async {
   if (!Hive.isAdapterRegistered(kAccountTypeId)) {
     Hive.registerAdapter(AccountModelAdapter());
   }
+  if (!Hive.isAdapterRegistered(9)) {
+  Hive.registerAdapter(SavingsGoalAdapter());
+  }
 
   // Open boxes
   await Future.wait([
@@ -73,6 +78,7 @@ void main() async {
     Hive.openBox<AppSettings>(kSettingsBox),
     Hive.openBox<bool>(kTipsFavoritesBox),
     Hive.openBox<AccountModel>(kAccountsBox),
+    Hive.openBox<SavingsGoal>('savings_goals'),
   ]);
 
   // Seed default categories if box is empty

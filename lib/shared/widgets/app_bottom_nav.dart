@@ -37,6 +37,11 @@ class AppBottomNav extends StatelessWidget {
           label: 'Add',
         ),
         NavigationDestination(
+          icon: Icon(Icons.flag_outlined),
+          selectedIcon: Icon(Icons.flag_rounded),
+          label: 'Goals',
+        ),
+        NavigationDestination(
           icon: Icon(Icons.bar_chart_outlined),
           selectedIcon: Icon(Icons.bar_chart_rounded),
           label: 'Analytics',

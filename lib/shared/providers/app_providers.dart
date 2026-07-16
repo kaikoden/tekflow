@@ -14,6 +14,8 @@ import '../../data/repositories/account_repository.dart';
 import '../../data/repositories/import_repository.dart';
 import '../../core/services/widget_service.dart';
 import '../../features/sms/sms_service.dart';
+import '../../data/repositories/savings_repository.dart';
+import '../../data/models/savings_goal_model.dart';
 
 // ─── Repository Providers ─────────────────────────────────────────────────────
 final transactionRepoProvider = Provider<TransactionRepository>((ref) {
@@ -46,6 +48,61 @@ final importRepoProvider = Provider<ImportRepository>((ref) {
     ref.watch(categoryRepoProvider),
     ref.watch(accountRepoProvider),
   );
+});
+
+final savingsRepoProvider = Provider<SavingsRepository>((ref) {
+  return SavingsRepository();
+});
+
+// Idugang ang notifier
+class SavingsNotifier extends StateNotifier<List<SavingsGoal>> {
+  final SavingsRepository _repo;
+
+  SavingsNotifier(this._repo) : super(_repo.getAll()) {
+    _repo.listenable.addListener(_onBoxChanged);
+  }
+
+  void _onBoxChanged() {
+    if (mounted) refresh();
+  }
+
+  @override
+  void dispose() {
+    _repo.listenable.removeListener(_onBoxChanged);
+    super.dispose();
+  }
+
+  void refresh() {
+    state = _repo.getAll();
+  }
+
+  Future<void> add(SavingsGoal goal) async {
+    await _repo.add(goal);
+    refresh();
+  }
+
+  Future<void> update(SavingsGoal goal) async {
+    await _repo.update(goal);
+    refresh();
+  }
+
+  Future<void> delete(String id) async {
+    await _repo.delete(id);
+    refresh();
+  }
+
+  Future<void> addContribution(String id, double amount) async {
+    await _repo.addContribution(id, amount);
+    refresh();
+  }
+
+  List<SavingsGoal> get active => _repo.getActive();
+  List<SavingsGoal> get completed => _repo.getCompleted();
+}
+
+final savingsProvider =
+    StateNotifierProvider<SavingsNotifier, List<SavingsGoal>>((ref) {
+  return SavingsNotifier(ref.watch(savingsRepoProvider));
 });
 
 // ─── Settings Provider ────────────────────────────────────────────────────────

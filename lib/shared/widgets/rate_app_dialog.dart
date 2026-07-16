@@ -25,7 +25,7 @@ class RateAppDialog {
     if (hasShown) return;
     
     Future.delayed(const Duration(seconds: 5), () {
-      if (context.mounted) {  // ✅ Guard
+      if (context.mounted) {
         _showRateDialog(context);
       }
     });
@@ -156,14 +156,14 @@ class _RateDialogState extends State<_RateDialog> {
                             ? () {
                                 setState(() => _submitted = true);
                                 Future.delayed(const Duration(seconds: 1), () {
-                                  if (mounted) Navigator.pop(context, true);  // ✅ Guard
+                                  if (mounted) Navigator.pop(context, true);
                                 });
                               }
                             : _rating >= 1
                                 ? () {
                                     setState(() => _submitted = true);
                                     Future.delayed(const Duration(seconds: 1), () {
-                                      if (mounted) Navigator.pop(context, false);  // ✅ Guard
+                                      if (mounted) Navigator.pop(context, false);
                                     });
                                   }
                                 : null,

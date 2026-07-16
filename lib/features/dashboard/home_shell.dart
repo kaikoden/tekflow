@@ -8,6 +8,8 @@ import '../transactions/transactions_screen.dart';
 import '../transactions/add_transaction_screen.dart';
 import '../analytics/analytics_screen.dart';
 import '../settings/settings_screen.dart';
+import '../savings/savings_screen.dart';
+
 
 class HomeShell extends ConsumerStatefulWidget {
   const HomeShell({super.key});
@@ -72,9 +74,11 @@ class _HomeShellState extends ConsumerState<HomeShell>
       case 1:
         return TransactionsScreen(onAddTransaction: _openAddTransaction);
       case 3:
-        return const AnalyticsScreen();
+        return const SavingsScreen();
       case 4:
-        return const SettingsScreen();
+          return const AnalyticsScreen();
+      case 5:
+          return const SettingsScreen();
       default:
         return DashboardScreen(
           onAddTransaction: _openAddTransaction,
