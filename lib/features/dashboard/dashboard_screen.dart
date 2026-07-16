@@ -12,6 +12,8 @@ import '../../shared/widgets/animated_counter.dart';
 import '../../shared/widgets/section_header.dart';
 import '../../shared/widgets/transaction_tile.dart';
 import '../tips/tips_data.dart';
+import '../transactions/add_transaction_screen.dart';
+import '../sms/sms_inbox_screen.dart';
 
 class DashboardScreen extends ConsumerStatefulWidget {
   final VoidCallback onAddTransaction;
@@ -48,12 +50,22 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     final txNotifier = ref.read(transactionProvider.notifier);
     final selectedAcc = ref.watch(selectedAccountProvider);
     final recent = ref.watch(filteredTransactionsProvider).take(5).toList();
-    
-    // Calculate balances based on filter
+
+    // Compute available balance (income - expense - savings)
+    final goals = ref.watch(savingsProvider);
+    final allTransactions = ref.watch(transactionProvider);
+    final totalIncome = allTransactions
+        .where((t) => t.type == TransactionType.income)
+        .fold(0.0, (sum, t) => sum + t.amount);
+    final totalExpense = allTransactions
+        .where((t) => t.type == TransactionType.expense)
+        .fold(0.0, (sum, t) => sum + t.amount);
+    final totalSaved = goals.fold(0.0, (sum, g) => sum + g.currentAmount);
+    final availableBalance = totalIncome - totalExpense - totalSaved;
+
     double balance, monthlyIncome, monthlyExpense;
     if (selectedAcc != null) {
       balance = selectedAcc.balance;
-      // We still need this month's stats for the cards
       final thisMonthTxs = ref.watch(filteredTransactionsProvider).where((t) {
         final now = DateTime.now();
         return t.date.month == now.month && t.date.year == now.year;
@@ -63,8 +75,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     } else {
       monthlyIncome = txNotifier.thisMonthIncome;
       monthlyExpense = txNotifier.thisMonthExpense;
-      balance = monthlyIncome - monthlyExpense;
-      balance = ref.watch(accountProvider).fold(0, (sum, a) => sum + a.balance);
+      balance = availableBalance;
     }
     final budgetRatio =
         settings.monthlyBudget != null && settings.monthlyBudget! > 0
@@ -78,17 +89,16 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: [
-          // Header section — greeting + balance card in a tinted container for light mode
           SliverToBoxAdapter(
             child: Container(
               decoration: BoxDecoration(
-                color: isDark 
-                    ? Colors.transparent 
+                color: isDark
+                    ? Colors.transparent
                     : accent.withValues(alpha: 0.08),
                 borderRadius: const BorderRadius.vertical(
-                        bottom: Radius.circular(28),
-                      ),
-                    ),
+                  bottom: Radius.circular(28),
+                ),
+              ),
               child: SafeArea(
                 bottom: false,
                 child: Column(
@@ -124,27 +134,27 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                               ),
                             ],
                           ),
-                          if (settings.avatarPath != null)
-                            CircleAvatar(
-                              radius: 22,
-                              backgroundImage: AssetImage(settings.avatarPath!),
-                            )
-                          else
-                            Container(
-                              width: 44,
-                              height: 44,
-                              decoration: BoxDecoration(
-                                color: accent,
-                                shape: BoxShape.circle,
-                              ),
-                              child: const Icon(Icons.person_rounded,
-                                  color: Colors.white, size: 22),
-                            ),
+                          GestureDetector(
+                            onTap: () => Navigator.of(context).pushNamed('/settings'),
+                            child: settings.avatarPath != null
+                                ? CircleAvatar(
+                                    radius: 22,
+                                    backgroundImage: AssetImage(settings.avatarPath!),
+                                  )
+                                : Container(
+                                    width: 44,
+                                    height: 44,
+                                    decoration: BoxDecoration(
+                                      color: accent,
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: const Icon(Icons.person_rounded,
+                                        color: Colors.white, size: 22),
+                                  ),
+                          ),
                         ],
                       ),
                     ).animate(delay: 0.ms).fadeIn(duration: 400.ms),
-                    
-                    // Account Filter / Balance list
                     const SizedBox(height: 16),
                     SizedBox(
                       height: 54,
@@ -215,41 +225,39 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                         monthlyBudget: settings.monthlyBudget,
                       ),
                     ).animate(delay: 60.ms).fadeIn(duration: 500.ms).scale(
-                          begin: const Offset(0.92, 0.92),
-                          end: const Offset(1, 1),
-                          duration: 500.ms,
-                          curve: Curves.easeOutExpo,
-                        ),
+                      begin: const Offset(0.92, 0.92),
+                      end: const Offset(1, 1),
+                      duration: 500.ms,
+                      curve: Curves.easeOutExpo,
+                    ),
                   ],
                 ),
               ),
             ),
           ),
-
-          // Quick actions
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-              child: _QuickActions(onAddTransaction: widget.onAddTransaction),
+              child: _QuickActions(
+                onExpense: () => _openAddTransactionWithType(TransactionType.expense),
+                onIncome: () => _openAddTransactionWithType(TransactionType.income),
+                onTransfer: () => _openAddTransactionWithType(TransactionType.transfer),
+                onScanSms: () => Navigator.of(context).pushNamed('/sms'),
+              ),
             ).animate(delay: 240.ms).fadeIn(duration: 400.ms),
           ),
-
-          // Mini bar chart
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
               child: AppCard(
                 padding: const EdgeInsets.all(16),
                 child: _MiniBarChart(
-                  transactions:
-                      ref.read(transactionRepoProvider).getLast7Days(),
+                  transactions: ref.read(transactionRepoProvider).getLast7Days(),
                   currencySymbol: symbol,
                 ),
               ),
             ).animate(delay: 400.ms).fadeIn(duration: 400.ms),
           ),
-
-          // Recent transactions
           SliverToBoxAdapter(
             child: SectionHeader(
               title: 'Recent Transactions',
@@ -257,7 +265,6 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
               onAction: widget.onViewAllTransactions,
             ).animate(delay: 300.ms).fadeIn(duration: 400.ms),
           ),
-
           if (recent.isEmpty)
             SliverToBoxAdapter(
               child: _EmptyState(onAdd: widget.onAddTransaction),
@@ -281,19 +288,30 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                 childCount: recent.length,
               ),
             ),
-
-          // Tip card
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(20, 8, 20, 120),
               child: _TipCard(tip: _tipOfDay),
             ).animate(delay: 500.ms).fadeIn(duration: 400.ms).rotate(
-                begin: 0.03,
-                end: 0,
-                duration: 500.ms,
-                curve: Curves.easeOutExpo),
+              begin: 0.03,
+              end: 0,
+              duration: 500.ms,
+              curve: Curves.easeOutExpo,
+            ),
           ),
         ],
+      ),
+    );
+  }
+
+  void _openAddTransactionWithType(TransactionType type) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      barrierColor: Colors.black.withValues(alpha: 0.5),
+      builder: (ctx) => AddTransactionScreen(
+        initialType: type,
       ),
     );
   }
@@ -358,7 +376,7 @@ class _BalanceCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'This Month',
+            'Available Balance',
             style: GoogleFonts.plusJakartaSans(
               fontSize: 13,
               color: Theme.of(context)
@@ -375,7 +393,9 @@ class _BalanceCard extends StatelessWidget {
             style: GoogleFonts.plusJakartaSans(
               fontSize: 36,
               fontWeight: FontWeight.w800,
-              color: Theme.of(context).colorScheme.onSurface,
+              color: balance >= 0
+                  ? Theme.of(context).colorScheme.onSurface
+                  : const Color(0xFFE8365D),
             ),
           ),
           const SizedBox(height: 20),
@@ -385,8 +405,7 @@ class _BalanceCard extends StatelessWidget {
                 child: _IncomeExpenseItem(
                   label: 'Income',
                   value: income,
-                  color:
-                      isDark ? CyanBlackWhite.incomeGreen : CyanBlackWhite.incomeGreen,
+                  color: isDark ? CyanBlackWhite.incomeGreen : CyanBlackWhite.incomeGreen,
                   icon: Icons.arrow_downward_rounded,
                   currencySymbol: currencySymbol,
                 ),
@@ -396,8 +415,7 @@ class _BalanceCard extends StatelessWidget {
                 child: _IncomeExpenseItem(
                   label: 'Expense',
                   value: expense,
-                  color:
-                      isDark ? CyanBlackWhite.expenseRed : CyanBlackWhite.expenseRed,
+                  color: isDark ? CyanBlackWhite.expenseRed : CyanBlackWhite.expenseRed,
                   icon: Icons.arrow_upward_rounded,
                   currencySymbol: currencySymbol,
                 ),
@@ -517,33 +535,25 @@ class _BudgetRing extends StatelessWidget {
 
 // ─── Quick Actions ────────────────────────────────────────────────────────────
 class _QuickActions extends StatelessWidget {
-  final VoidCallback onAddTransaction;
+  final VoidCallback onExpense;
+  final VoidCallback onIncome;
+  final VoidCallback onTransfer;
+  final VoidCallback onScanSms;
 
-  const _QuickActions({required this.onAddTransaction});
+  const _QuickActions({
+    required this.onExpense,
+    required this.onIncome,
+    required this.onTransfer,
+    required this.onScanSms,
+  });
 
   @override
   Widget build(BuildContext context) {
     final actions = [
-      (
-        icon: Icons.remove_circle_outline_rounded,
-        label: 'Expense',
-        color: const Color(0xFFE8365D)
-      ),
-      (
-        icon: Icons.add_circle_outline_rounded,
-        label: 'Income',
-        color: const Color(0xFF00B87C)
-      ),
-      (
-        icon: Icons.swap_horiz_rounded,
-        label: 'Transfer',
-        color: const Color(0xFFFFB300)
-      ),
-      (
-        icon: Icons.sms_rounded,
-        label: 'Scan SMS',
-        color: const Color(0xFF6C63FF)
-      ),
+      (icon: Icons.remove_circle_outline_rounded, label: 'Expense', color: const Color(0xFFE8365D), onTap: onExpense),
+      (icon: Icons.add_circle_outline_rounded, label: 'Income', color: const Color(0xFF00B87C), onTap: onIncome),
+      (icon: Icons.swap_horiz_rounded, label: 'Transfer', color: const Color(0xFFFFB300), onTap: onTransfer),
+      (icon: Icons.sms_rounded, label: 'Scan SMS', color: const Color(0xFF6C63FF), onTap: onScanSms),
     ];
 
     return Row(
@@ -551,7 +561,7 @@ class _QuickActions extends StatelessWidget {
         final a = actions[i];
         return Expanded(
           child: GestureDetector(
-            onTap: onAddTransaction,
+            onTap: a.onTap,
             child: Container(
               margin: EdgeInsets.only(right: i < actions.length - 1 ? 8 : 0),
               padding: const EdgeInsets.symmetric(vertical: 12),
@@ -579,9 +589,10 @@ class _QuickActions extends StatelessWidget {
               ),
             ),
           ).animate(delay: Duration(milliseconds: 240 + i * 40)).scale(
-              begin: const Offset(0, 0),
-              duration: 400.ms,
-              curve: Curves.elasticOut),
+            begin: const Offset(0, 0),
+            duration: 400.ms,
+            curve: Curves.elasticOut,
+          ),
         );
       }),
     );
@@ -602,7 +613,6 @@ class _MiniBarChart extends StatelessWidget {
   Widget build(BuildContext context) {
     final accent = Theme.of(context).colorScheme.primary;
 
-    // Build daily data for last 7 days
     final now = DateTime.now();
     final dailyData = <int, double>{};
     for (int i = 6; i >= 0; i--) {
@@ -654,12 +664,9 @@ class _MiniBarChart extends StatelessWidget {
               ),
               titlesData: FlTitlesData(
                 show: true,
-                leftTitles:
-                    const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                topTitles:
-                    const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                rightTitles:
-                    const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                leftTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
                 bottomTitles: AxisTitles(
                   sideTitles: SideTitles(
                     showTitles: true,
@@ -693,8 +700,7 @@ class _MiniBarChart extends StatelessWidget {
                     BarChartRodData(
                       toY: val,
                       width: 18,
-                      borderRadius:
-                          const BorderRadius.vertical(top: Radius.circular(6)),
+                      borderRadius: const BorderRadius.vertical(top: Radius.circular(6)),
                       color: isToday ? accent : accent.withValues(alpha: 0.4),
                     ),
                   ],
@@ -780,8 +786,7 @@ class _EmptyState extends StatelessWidget {
           Icon(
             Icons.receipt_long_outlined,
             size: 64,
-            color:
-                Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.2),
+            color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.2),
           ),
           const SizedBox(height: 16),
           Text(

@@ -18,125 +18,111 @@ const List<FinanceTip> allTips = [
   // ── Daily Habits ──────────────────────────────────────────────────────────
   FinanceTip(
     id: '1',
-    text:
-        'Track every peso for 30 days — awareness alone reduces spending by 20%.',
+    text: 'Mag-track ng bawat piso sa loob ng 30 araw — ang awareness lang ay nakakabawas ng 20% sa gastos.',
     category: TipCategory.dailyHabits,
     emoji: '📊',
   ),
   FinanceTip(
     id: '2',
-    text: 'Use the 24-hour rule before any non-essential purchase above ₹500.',
+    text: 'Gamitin ang 24-hour rule bago bumili ng kahit anong hindi kailangan na lagpas ₱500.',
     category: TipCategory.dailyHabits,
     emoji: '⏰',
   ),
   FinanceTip(
     id: '3',
-    text:
-        'Cook at home 5 days a week — saves ₹3,000–₹8,000/month for most people.',
+    text: 'Magbaon ng lunch 3x a week — kahit ₱100/day lang yan, ₱1,200/month na ang natipid mo.',
     category: TipCategory.dailyHabits,
-    emoji: '🍳',
+    emoji: '🍱',
   ),
   FinanceTip(
     id: '4',
-    text:
-        'Cancel subscriptions you haven\'t used in 30 days. Review every 3 months.',
+    text: 'I-cancel ang mga subscriptions na hindi mo nagamit sa loob ng 30 araw.',
     category: TipCategory.dailyHabits,
     emoji: '📱',
   ),
   FinanceTip(
     id: '5',
-    text: 'Never grocery shop hungry — impulse buys add 25–40% to your cart.',
+    text: 'Huwag mamili ng grocery kung gutom — nadadagdagan ng 25–40% ang iyong cart.',
     category: TipCategory.dailyHabits,
     emoji: '🛒',
   ),
   FinanceTip(
     id: '6',
-    text: 'Make coffee at home 4 days a week — saves ₹1,500–₹3,000/month.',
+    text: 'Magkape sa bahay 4x a week — nakakatipid ka ng ₱1,500–₱3,000 kada buwan.',
     category: TipCategory.dailyHabits,
     emoji: '☕',
   ),
   FinanceTip(
     id: '7',
-    text:
-        'Use UPI for all purchases to maintain a digital trail — hidden spending becomes visible.',
+    text: 'Gumamit ng GCash o PayMaya para makita mo ang bawat gastos — visible ang hidden spending.',
     category: TipCategory.dailyHabits,
     emoji: '💳',
   ),
   FinanceTip(
     id: '8',
-    text:
-        'Do a weekly 10-minute money review — catch subscriptions, fees, and leaks early.',
+    text: 'Gumawa ng weekly 10-minute money review — alamin kung saan napupunta ang pera mo.',
     category: TipCategory.dailyHabits,
     emoji: '🔍',
   ),
   FinanceTip(
     id: '9',
-    text: 'Unsubscribe from marketing emails — out of sight, out of cart.',
+    text: 'Mag-unsubscribe sa marketing emails — out of sight, out of mind, out of cart.',
     category: TipCategory.dailyHabits,
     emoji: '📧',
   ),
   FinanceTip(
     id: '10',
-    text:
-        'Pack lunch 3x/week — even ₹100/day saved is ₹1,200/month in your pocket.',
+    text: 'Magluto sa bahay 5x a week — nakakatipid ka ng ₱3,000–₱8,000 kada buwan.',
     category: TipCategory.dailyHabits,
-    emoji: '🍱',
+    emoji: '🍳',
   ),
 
   // ── Big Purchases ─────────────────────────────────────────────────────────
   FinanceTip(
     id: '11',
-    text:
-        'Before any big purchase, ask: "Will I still want this in 90 days?" Most answers are no.',
+    text: 'Bago bumili ng mahal, tanungin ang sarili: "Kailangan ko ba ito sa susunod na 90 araw?" Karamihan ay "hindi".',
     category: TipCategory.bigPurchases,
     emoji: '🤔',
   ),
   FinanceTip(
     id: '12',
-    text:
-        'Buy electronics 2–3 generations behind the latest — 60–70% cheaper, 90% of the function.',
+    text: 'Bumili ng electronics na 2–3 generations behind — 60–70% mas mura, 90% ng function.',
     category: TipCategory.bigPurchases,
     emoji: '📱',
   ),
   FinanceTip(
     id: '13',
-    text:
-        'Never buy a car with more than 15% of your annual income — depreciation is brutal.',
+    text: 'Huwag bumili ng sasakyan na lagpas sa 15% ng annual income mo — mabilis ang depreciation.',
     category: TipCategory.bigPurchases,
     emoji: '🚗',
   ),
   FinanceTip(
     id: '14',
-    text:
-        'Use price-tracking apps (Keepa, PriceHistory) before any online purchase above ₹1,000.',
+    text: 'Gumamit ng price-tracking apps (Shopee, Lazada) bago bumili ng lagpas ₱1,000.',
     category: TipCategory.bigPurchases,
     emoji: '📉',
   ),
   FinanceTip(
     id: '15',
-    text:
-        'Buy refurbished for appliances and electronics — often 30–50% off with full warranty.',
+    text: 'Bumili ng refurbished para sa appliances — 30–50% off na may warranty pa.',
     category: TipCategory.bigPurchases,
     emoji: '🔄',
   ),
   FinanceTip(
     id: '16',
-    text:
-        'Negotiate everything — services, rent, insurance, internet. Asking costs nothing.',
+    text: 'Makipag-negotiate sa lahat — services, rent, insurance, internet. Walang mawawala kung magtanong.',
     category: TipCategory.bigPurchases,
     emoji: '🤝',
   ),
   FinanceTip(
     id: '17',
-    text:
-        'Avoid zero-cost EMI traps — they often inflate product price by 8–15% upfront.',
+    text: 'Iwasan ang "0% interest" na installment — madalas inflated ang presyo ng produkto.',
     category: TipCategory.bigPurchases,
     emoji: '⚠️',
   ),
   FinanceTip(
     id: '18',
-    text:
-        'Compare cost-per-use, not cost. A ₹3,000 item used once costs more than ₹15,000 used daily.',
+    text: 'I-compare ang cost-per-use, hindi ang presyo. ₱3,000 na ginamit isang beses ay mas mahal pa sa ₱15,000 na ginagamit araw-araw.',
     category: TipCategory.bigPurchases,
     emoji: '💡',
   ),
@@ -144,56 +130,49 @@ const List<FinanceTip> allTips = [
   // ── Savings ───────────────────────────────────────────────────────────────
   FinanceTip(
     id: '19',
-    text:
-        'Pay yourself first — automate 20% savings before spending anything else.',
+    text: 'Bayaran mo muna ang sarili mo — mag-automate ng 20% savings bago gumastos.',
     category: TipCategory.savings,
     emoji: '💰',
   ),
   FinanceTip(
     id: '20',
-    text:
-        'Build a 3–6 month emergency fund before any investment. Security is the foundation.',
+    text: 'Mag-ipon ng 3–6 months na emergency fund bago mag-invest. Seguridad ang pundasyon.',
     category: TipCategory.savings,
     emoji: '🛡️',
   ),
   FinanceTip(
     id: '21',
-    text:
-        'The 50-30-20 rule: 50% needs, 30% wants, 20% savings/debt. Adjust to your reality.',
+    text: 'Ang 50-30-20 rule: 50% needs, 30% wants, 20% savings/debt. I-adjust sa iyong sitwasyon.',
     category: TipCategory.savings,
     emoji: '📏',
   ),
   FinanceTip(
     id: '22',
-    text:
-        'Every raise is a chance to increase savings rate, not lifestyle. Try saving 50% of every increment.',
+    text: 'Tuwing may salary increase, subukang i-save ang 50% ng dagdag — huwag agad i-upgrade ang lifestyle.',
     category: TipCategory.savings,
     emoji: '📈',
   ),
   FinanceTip(
     id: '23',
-    text:
-        'Automate savings on salary day — willpower is a finite resource, systems aren\'t.',
+    text: 'I-automate ang savings sa araw ng sweldo — ang willpower ay limitado, ang sistema ay hindi.',
     category: TipCategory.savings,
     emoji: '🤖',
   ),
   FinanceTip(
     id: '24',
-    text:
-        'Keep savings in a separate account with no debit card — friction reduces impulse withdrawals.',
+    text: 'Ilagay ang savings sa ibang account na walang debit card — nakakabawas ng impulse withdrawal.',
     category: TipCategory.savings,
     emoji: '🔒',
   ),
   FinanceTip(
     id: '25',
-    text: 'A savings rate of 10% is survival. 20% is comfort. 40%+ is freedom.',
+    text: 'Ang 10% savings rate ay survival. 20% ay comfort. 40%+ ay kalayaan.',
     category: TipCategory.savings,
     emoji: '🎯',
   ),
   FinanceTip(
     id: '26',
-    text:
-        'Round up every transaction to the nearest ₹100 in your mental accounting — the buffer adds up.',
+    text: 'I-round up ang bawat transaction sa susunod na ₱100 sa iyong mental accounting — ang buffer ay dumadagdag.',
     category: TipCategory.savings,
     emoji: '⬆️',
   ),
@@ -201,63 +180,55 @@ const List<FinanceTip> allTips = [
   // ── Investments ───────────────────────────────────────────────────────────
   FinanceTip(
     id: '27',
-    text:
-        'Time in the market beats timing the market — 95% of investors who try to time it lose.',
+    text: 'Mas mahalaga ang oras sa merkado kaysa sa pag-timing ng merkado — 95% ng mga nagte-timing ay natatalo.',
     category: TipCategory.investments,
     emoji: '⏳',
   ),
   FinanceTip(
     id: '28',
-    text:
-        'Start a SIP of even ₹500/month — compounding over 20 years is more powerful than any "hot tip".',
+    text: 'Magsimula ng SIP kahit ₱500/month — ang compounding sa loob ng 20 taon ay mas malakas kaysa sa "hot tip".',
     category: TipCategory.investments,
     emoji: '🌱',
   ),
   FinanceTip(
     id: '29',
-    text:
-        'Index funds outperform 80% of actively managed funds over 10+ years. Keep it simple.',
+    text: 'Ang index funds ay mas mahusay kaysa sa 80% ng actively managed funds sa loob ng 10+ taon. Panatilihing simple.',
     category: TipCategory.investments,
     emoji: '📊',
   ),
   FinanceTip(
     id: '30',
-    text:
-        'Invest in yourself first — skills that increase your income have the highest ROI.',
+    text: 'Mag-invest sa sarili mo muna — ang skills na nagpapataas ng income ay may pinakamataas na ROI.',
     category: TipCategory.investments,
     emoji: '🎓',
   ),
   FinanceTip(
     id: '31',
-    text: 'Max out ELSS to save tax under 80C — free ₹1.5L deduction per year.',
+    text: 'I-maximize ang Pag-IBIG MP2 — mas mataas ang dividend kaysa sa regular na savings account.',
     category: TipCategory.investments,
     emoji: '🏛️',
   ),
   FinanceTip(
     id: '32',
-    text:
-        'Never put more than 5% of your portfolio in a single stock. Diversification is free insurance.',
+    text: 'Huwag ilagay ang higit sa 5% ng portfolio mo sa iisang stock. Diversification ay libreng insurance.',
     category: TipCategory.investments,
     emoji: '🧺',
   ),
   FinanceTip(
     id: '33',
-    text:
-        'Rebalance your portfolio once a year — not every market dip. Noise vs signal.',
+    text: 'I-rebalance ang portfolio mo isang beses sa isang taon — huwag sa bawat market dip.',
     category: TipCategory.investments,
     emoji: '⚖️',
   ),
   FinanceTip(
     id: '34',
-    text:
-        'Emergency fund in liquid FD or liquid mutual fund — not savings account, not equities.',
+    text: 'Ang emergency fund ay ilagay sa digital banks (SeaBank, Maya, CIMB) na may mataas na interest, hindi sa savings account o equities.',
     category: TipCategory.investments,
     emoji: '💧',
   ),
   FinanceTip(
     id: '35',
-    text:
-        'Real estate is not liquid — don\'t count your home as an investment unless you plan to sell.',
+    text: 'Ang real estate ay hindi liquid — huwag bilangin ang bahay mo bilang investment kung hindi mo naman ito ibebenta.',
     category: TipCategory.investments,
     emoji: '🏠',
   ),
@@ -265,106 +236,91 @@ const List<FinanceTip> allTips = [
   // ── Mindset ───────────────────────────────────────────────────────────────
   FinanceTip(
     id: '36',
-    text:
-        'Wealth is not income, it\'s what you keep. A ₹1L/month spender is poorer than a ₹50K/month saver.',
+    text: 'Ang yaman ay hindi income, ito ay kung ano ang naiiwan sa iyo. Ang ₱100K/month na gumagastos ay mas mahirap kaysa sa ₱50K/month na nag-iipon.',
     category: TipCategory.mindset,
     emoji: '🧠',
   ),
   FinanceTip(
     id: '37',
-    text:
-        'Lifestyle inflation is the silent killer — every upgrade costs you years of freedom.',
+    text: 'Ang lifestyle inflation ay ang silent killer — ang bawat upgrade ay nagkakahalaga sa iyo ng taon ng kalayaan.',
     category: TipCategory.mindset,
     emoji: '🚀',
   ),
   FinanceTip(
     id: '38',
-    text:
-        'Comparing your finances to others is toxic — everyone\'s starting line is different.',
+    text: 'Ang pag-compare ng sarili sa iba ay nakakalason — iba-iba ang starting line ng bawat isa.',
     category: TipCategory.mindset,
     emoji: '🎭',
   ),
   FinanceTip(
     id: '39',
-    text:
-        'Frugality isn\'t deprivation — it\'s choosing what truly matters to you.',
+    text: 'Ang pagiging matipid ay hindi deprivation — ito ay pagpili sa kung ano ang tunay na mahalaga sa iyo.',
     category: TipCategory.mindset,
     emoji: '🎯',
   ),
   FinanceTip(
     id: '40',
-    text:
-        'Financial freedom is buying time, not things. Time is the only non-renewable resource.',
+    text: 'Ang financial freedom ay pagbili ng oras, hindi ng mga bagay. Ang oras ay ang tanging non-renewable resource.',
     category: TipCategory.mindset,
     emoji: '⏰',
   ),
   FinanceTip(
     id: '41',
-    text:
-        'Small consistent actions compound more than big sporadic ones. ₹100/day > ₹3,000 once a month.',
+    text: 'Ang maliliit na consistent actions ay mas malakas kaysa sa malalaking sporadic actions. ₱100/araw > ₱3,000 isang beses sa isang buwan.',
     category: TipCategory.mindset,
     emoji: '🔁',
   ),
   FinanceTip(
     id: '42',
-    text:
-        'Know the difference between an asset (puts money in your pocket) and a liability (takes money out).',
+    text: 'Alamin ang pagkakaiba ng asset (nagdadala ng pera sa iyo) at liability (kumukuha ng pera sa iyo).',
     category: TipCategory.mindset,
     emoji: '📚',
   ),
   FinanceTip(
     id: '43',
-    text:
-        'The best financial decision you can make is staying healthy — medical costs can wipe savings fast.',
+    text: 'Ang pinakamahusay na financial decision ay ang manatiling malusog — ang medical costs ay kayang magpawi ng savings.',
     category: TipCategory.mindset,
     emoji: '❤️',
   ),
   FinanceTip(
     id: '44',
-    text:
-        'Your network affects your net worth — surround yourself with financially disciplined people.',
+    text: 'Ang iyong network ay nakakaapekto sa iyong net worth — palibutan ang sarili ng mga taong financially disciplined.',
     category: TipCategory.mindset,
     emoji: '🤝',
   ),
   FinanceTip(
     id: '45',
-    text:
-        'A budget isn\'t a restriction — it\'s permission to spend guilt-free on what you\'ve prioritized.',
+    text: 'Ang budget ay hindi restriction — ito ay permission na gumastos ng walang guilt sa mga na-prioritize mo.',
     category: TipCategory.mindset,
     emoji: '✅',
   ),
   FinanceTip(
     id: '46',
-    text:
-        'The secret to getting rich is boring: spend less than you earn, invest the difference, repeat.',
+    text: 'Ang sikreto sa pagyaman ay boring: gumastos ng mas mababa sa kinikita, i-invest ang difference, ulitin.',
     category: TipCategory.mindset,
     emoji: '🔑',
   ),
   FinanceTip(
     id: '47',
-    text:
-        'Every financial mistake is tuition — analyze it, learn, move on. Guilt costs you twice.',
+    text: 'Ang bawat financial mistake ay tuition — pag-aralan, matuto, magpatuloy. Ang guilt ay mas mahal.',
     category: TipCategory.mindset,
     emoji: '🎓',
   ),
   FinanceTip(
     id: '48',
-    text:
-        'FOMO investing — buying because everyone else is — is how most retail investors lose money.',
+    text: 'Ang FOMO investing — bumili dahil lahat ay bumibili — ay kung paano natatalo ang karamihan ng retail investors.',
     category: TipCategory.mindset,
     emoji: '😰',
   ),
   FinanceTip(
     id: '49',
-    text:
-        'Read one personal finance book a year — knowledge compounds exactly like money does.',
+    text: 'Magbasa ng isang personal finance book sa isang taon — ang knowledge ay nagco-compound tulad ng pera.',
     category: TipCategory.mindset,
     emoji: '📖',
   ),
   FinanceTip(
     id: '50',
-    text:
-        'True luxury is waking up without financial anxiety — not owning the most expensive things.',
+    text: 'Ang tunay na luxury ay ang gumising ng walang financial anxiety — hindi ang pagmamay-ari ng pinakamahal na bagay.',
     category: TipCategory.mindset,
     emoji: '🌅',
   ),

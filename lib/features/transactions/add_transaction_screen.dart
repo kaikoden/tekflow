@@ -17,8 +17,13 @@ import '../settings/manage_accounts_screen.dart';
 
 class AddTransactionScreen extends ConsumerStatefulWidget {
   final TransactionModel? existingTransaction;
+  final TransactionType? initialType; // ✅ Bag-o: para sa quick actions
 
-  const AddTransactionScreen({super.key, this.existingTransaction});
+  const AddTransactionScreen({
+    super.key,
+    this.existingTransaction,
+    this.initialType,
+  });
 
   @override
   ConsumerState<AddTransactionScreen> createState() =>
@@ -47,7 +52,7 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen>
   void initState() {
     super.initState();
     final ex = widget.existingTransaction;
-    _selectedType = ex?.type ?? TransactionType.expense;
+    _selectedType = ex?.type ?? widget.initialType ?? TransactionType.expense; // ✅ Gi-update
     _amountController =
         TextEditingController(text: ex != null ? ex.amount.toString() : '');
     _noteController = TextEditingController(text: ex?.note ?? '');
@@ -813,6 +818,7 @@ class _ReceiptButton extends StatelessWidget {
     );
   }
 }
+
 // ─── Account Selector ─────────────────────────────────────────────────────────
 class _AccountSelector extends StatelessWidget {
   final List<AccountModel> accounts;
