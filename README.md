@@ -28,6 +28,7 @@ Beautiful glassmorphism UI · Riverpod state · Hive local database · Zero data
 | 💰 | **Transaction Tracking** | Log income, expenses, and transfers with categories, notes, and tags |
 | 📊 | **Analytics** | Bar charts, pie charts, weekly/monthly/yearly breakdowns |
 | 🎯 | **Budget Tracking** | Set monthly budgets per category with live progress bars |
+| 🏦 | **Savings Goals** | Set savings targets, track progress, and add contributions |
 | 📱 | **SMS Bank Reader** | Auto-reads bank transaction SMS — 100% local, never uploaded |
 | 🔐 | **App Lock** | Biometric / device PIN gate on open and on background resume |
 | ☁️ | **Backup & Restore** | Export full data as JSON and restore from file |
@@ -66,6 +67,7 @@ Beautiful glassmorphism UI · Riverpod state · Hive local database · Zero data
 | Notifications | `flutter_local_notifications`, `flutter_timezone` |
 | Background Tasks | `workmanager` |
 | File Operations | `path_provider`, `share_plus`, `file_picker` |
+| Savings Goals | Custom implementation with Hive |
 
 ---
 
@@ -89,3 +91,118 @@ flutter pub get
 
 # 3. Run on connected device
 flutter run
+```
+
+### Build Release APK
+
+```bash
+flutter build apk --release --no-tree-shake-icons
+# Output: build/app/outputs/flutter-apk/tekflow.apk
+```
+
+> **Note:** The `--no-tree-shake-icons` flag is required because category icons are stored as integer codepoints in Hive and resolved at runtime via `IconData(codePoint, fontFamily: 'MaterialIcons')`.
+
+### Install on Device (ADB)
+
+```bash
+adb install build/app/outputs/flutter-apk/tekflow.apk
+```
+
+---
+
+## Project Structure
+
+```
+lib/
+├── core/
+│   ├── constants/      # App-wide constants, currencies, default categories
+│   ├── theme/          # AppTheme, AppColors, gradients
+│   └── utils/          # SmsParser, formatters
+├── data/
+│   ├── models/         # Hive models + hand-written .g.dart adapters
+│   └── repositories/   # Thin Hive box wrappers
+├── features/           # One folder per screen/feature
+│   ├── analytics/
+│   ├── app_lock/
+│   ├── backup/
+│   ├── budget/
+│   ├── dashboard/
+│   ├── onboarding/
+│   ├── savings/        # NEW: Savings Goals feature
+│   ├── settings/
+│   ├── sms/
+│   ├── splash/
+│   ├── tips/
+│   └── transactions/
+└── shared/
+    ├── providers/      # All Riverpod providers (settings, transactions, categories, SMS, savings)
+    └── widgets/        # Reusable widgets (GlassCard, TransactionTile, etc.)
+```
+
+---
+
+## Architecture Notes
+
+- **Hive adapters are hand-written** — the `.g.dart` files are checked in. Do not run `build_runner` unless adding new adapters.
+- **Settings state** — `AppSettings` is cloned via `fromJson`/`toJson` on every update so Riverpod detects the change. Mutation-in-place won't work.
+- **Tab indices** in `HomeShell`: `0`=Dashboard, `1`=Transactions, `2`=FAB (opens sheet), `3`=Savings Goals, `4`=Analytics, `5`=Settings.
+- **fl_chart v0.68** — does not accept `duration`/`curve` at the chart widget level.
+- **Notifications** — `flutter_timezone` is used to resolve the device's local timezone at runtime via `FlutterTimezone.getLocalTimezone()`. This must be called during `NotificationService.init()` before any `zonedSchedule` call, otherwise notifications fire at UTC time on many devices.
+- **Week analytics** — uses a rolling last-7-days window (`today − 6` to `today`), not a Mon–Sun calendar week, so data is always visible regardless of the day of the week.
+- **Savings Goals** — stored in Hive with type ID 9, supports progress tracking, contributions, and completion status.
+
+---
+
+## Permissions (Android)
+
+| Permission | Why |
+|---|---|
+| `READ_SMS` | SMS Bank Reader — reads bank transaction messages locally |
+| `USE_BIOMETRIC` / `USE_FINGERPRINT` | App Lock |
+| `POST_NOTIFICATIONS` | Daily reminder notifications |
+| `CAMERA` / `READ_MEDIA_IMAGES` | Profile avatar picker |
+| `RECEIVE_BOOT_COMPLETED` | Reschedule notifications after reboot |
+| `USE_FULL_SCREEN_INTENT` | Show heads-up notification display |
+
+All permissions are optional. Core tracking works without any of them.
+
+---
+
+## Contributing
+
+Contributions are very welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) first.
+
+1. Fork the repo
+2. Create a branch: `git checkout -b feat/your-feature`
+3. Commit your changes
+4. Open a Pull Request
+
+---
+
+## Roadmap
+
+- [ ] Recurring / scheduled transactions
+- [x] CSV / XLSX Import & Export
+- [x] Home Screen Widgets (Live Balance & Quick Add)
+- [x] Savings Goals with visual progress tracking
+- [ ] Natural Language Processing (NLP) for quick expense entry
+- [ ] Receipt OCR (AI Scanner) for automated bill logging
+- [ ] Debt & Loan Manager (track who owes you and who you owe)
+- [ ] PDF Financial Reports (branded monthly summaries)
+- [ ] Split-the-Bill integration
+- [ ] Voice-to-Expense input
+- [ ] iOS support
+- [ ] UPI deep link detection
+- [ ] Multi-account support
+
+---
+
+## License
+
+Distributed under the MIT License. See [LICENSE](LICENSE) for details.
+
+---
+
+<div align="center">
+Made with ❤️ by <a href="https://github.com/kaikoden">Kurt Joshua</a> &amp; <a href="https://claude.ai/code">Claude Code</a>
+</div>
