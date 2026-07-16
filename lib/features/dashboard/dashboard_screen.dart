@@ -13,7 +13,6 @@ import '../../shared/widgets/section_header.dart';
 import '../../shared/widgets/transaction_tile.dart';
 import '../tips/tips_data.dart';
 import '../transactions/add_transaction_screen.dart';
-import '../sms/sms_inbox_screen.dart';
 
 class DashboardScreen extends ConsumerStatefulWidget {
   final VoidCallback onAddTransaction;
